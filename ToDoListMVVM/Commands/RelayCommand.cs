@@ -14,11 +14,11 @@ namespace ToDoListMVVM.Commands
         private Action<object> _Execute { get; set; }
         private Predicate<object> _CanExecute { get; set; }
 
-        public RelayCommand(Action<object> execute, Predicate<object> carExecute)
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             _Execute = execute;
 
-            _CanExecute = carExecute;
+            _CanExecute = canExecute;
         }
 
         public bool CanExecute(object? parameter)

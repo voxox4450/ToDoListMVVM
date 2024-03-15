@@ -8,6 +8,9 @@ using System.Windows;
 using ToDoListMVVM.Models;
 using ToDoListMVVM.Views;
 using Serilog;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using ToDoListMVVM.Commands;
 
 namespace ToDoListMVVM.ViewModel
 {
@@ -15,6 +18,8 @@ namespace ToDoListMVVM.ViewModel
     {
         private UserControlAddViewModel userControlAdd;
         private UserControlEditViewModel userControlEdit;
+        public ObservableCollection<Note> Notes1 { get; set; }
+        public ICommand ShowWindowCommand { get; set; }
 
         public List<Priority> priorityList { get; set; } = Constants.GetPriorities();
 
@@ -24,6 +29,7 @@ namespace ToDoListMVVM.ViewModel
 
         public MainWindowViewModel()
         {
+            ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .Enrich.WithProperty("DeviceName", Environment.MachineName)
@@ -40,6 +46,16 @@ namespace ToDoListMVVM.ViewModel
                 Notes = dbContext.GetNotesWithDetails();
             }
             listView.ItemsSource = Notes;
+        }
+
+        private bool CanShowWindow(object obj)
+        {
+            return true;
+        }
+
+        private void ShowWindow(object obj)
+        {
+            //show window
         }
 
         private void WindowClosed(object sender, EventArgs e)

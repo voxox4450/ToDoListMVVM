@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDoListMVVM.ViewModel;
 
 namespace ToDoListMVVM
 {
@@ -19,6 +20,8 @@ namespace ToDoListMVVM
         public MainWindow()
         {
             InitializeComponent();
+            MainWindowViewModel mainViewModel = new MainWindowViewModel();
+            this.DataContext = mainViewModel;
         }
     }
 }
