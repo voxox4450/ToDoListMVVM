@@ -5,3 +5,4 @@ poczytac dokumentacje
 
 ogbarnc DIE
 ogarnac toolkikt
+mvvmdialogs
