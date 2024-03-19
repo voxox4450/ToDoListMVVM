@@ -9,12 +9,8 @@ namespace ToDoListMVVM.Models
 {
     public class Database
     {
-        public Database()
-        {
-        }
-
-        public DbSet<Note> Notes { get; set; }
-        public DbSet<Status> Statuses { get; set; }
-        public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Note>? Notes { get; set; }
+        public DbSet<Status>? Statuses { get; set; }
+        public DbSet<Priority>? Priorities { get; set; }
     }
 }
