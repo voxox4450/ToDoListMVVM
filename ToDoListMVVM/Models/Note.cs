@@ -17,15 +17,5 @@ namespace ToDoListMVVM.Models
         public Priority Priority { get; set; }
         public Status Status { get; set; }
         public int StatusId { get; set; }
-
-        public void GetPriority()
-        {
-            Priority = Constants.GetPriority(PriorityId);
-        }
-
-        public void GetStatus()
-        {
-            Status = Constants.GetStatus(StatusId);
-        }
     }
 }

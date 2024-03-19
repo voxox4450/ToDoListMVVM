@@ -119,7 +119,6 @@
             Grid.Column="2"
             Width="250"
             Height="50"
-            Click="EditClick"
             Content="Edytuj"
             FontSize="25"
             FontWeight="Bold" />

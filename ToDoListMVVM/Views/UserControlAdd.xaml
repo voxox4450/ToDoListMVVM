@@ -119,7 +119,6 @@
             Grid.Column="2"
             Width="250"
             Height="50"
-            Click="AddClick"
             Content="Dodaj"
             FontSize="25"
             FontWeight="Bold" />

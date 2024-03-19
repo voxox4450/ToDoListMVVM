@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,7 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToDoListMVVM.ViewModel;
 
-namespace ToDoListMVVM
+namespace ToDoListMVVM.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -20,8 +21,7 @@ namespace ToDoListMVVM
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel mainViewModel = new MainWindowViewModel();
-            this.DataContext = mainViewModel;
+            DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>();
         }
     }
 }
