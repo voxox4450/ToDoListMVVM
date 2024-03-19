@@ -30,6 +30,7 @@ namespace ToDoListMVVM
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
                 .AddTransient<MainWindowViewModel>()
+                .AddTransient<UserControlAddViewModel>()
                 .AddSingleton<INoteService, NoteService>()
                 .BuildServiceProvider());
         }

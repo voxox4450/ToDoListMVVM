@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ToDoListMVVM.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ToDoListMVVM.ViewModel
 {
     public class UserControlAddViewModel
     {
+        public UserControlAddViewModel()
+        { }
     }
 }
