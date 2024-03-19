@@ -11,7 +11,5 @@ namespace ToDoListMVVM.Services
     {
         public NoteService()
         { }
-
-        // Tutaj możesz implementować metody interfejsu INoteService
     }
 }

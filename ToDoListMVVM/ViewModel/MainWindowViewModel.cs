@@ -11,10 +11,22 @@ using Serilog;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ToDoListMVVM;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ToDoListMVVM.ViewModel
 {
     public class MainWindowViewModel
     {
+        public ICommand ExitCommand { get; }
+
+        public MainWindowViewModel()
+        {
+            ExitCommand = new RelayCommand(ExitApplication);
+        }
+
+        private void ExitApplication()
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

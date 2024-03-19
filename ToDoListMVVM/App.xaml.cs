@@ -10,6 +10,7 @@ using ToDoListMVVM.ViewModel;
 using ToDoListMVVM.Views;
 using ToDoListMVVM.Interface;
 using ToDoListMVVM.Services;
+using ToDoListMVVM;
 
 namespace ToDoListMVVM
 {
@@ -28,7 +29,7 @@ namespace ToDoListMVVM
         {
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
-                .AddTransient<MainWindow>()
+                .AddTransient<MainWindowViewModel>()
                 .AddSingleton<INoteService, NoteService>()
                 .BuildServiceProvider());
         }

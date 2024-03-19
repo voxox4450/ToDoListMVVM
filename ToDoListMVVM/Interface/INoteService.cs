@@ -8,6 +8,5 @@ namespace ToDoListMVVM.Interface
 {
     public interface INoteService
     {
-        // Tutaj możesz zdefiniować metody, które będą implementowane przez klasy usług
     }
 }
