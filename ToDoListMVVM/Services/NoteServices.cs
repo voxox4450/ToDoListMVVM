@@ -10,14 +10,14 @@ namespace ToDoListMVVM.Services
 {
     public class NoteService : INoteService
     {
-        private readonly List<Note> _notes = new List<Note>();
+        //private readonly List<Note> _notes = new List<Note>();
 
         public NoteService()
         { }
 
-        public void AddNote(Note note)
-        {
-            _notes.Add(note);
-        }
+        //public void AddNote(Note note)
+        //{
+        //    _notes.Add(note);
+        //}
     }
 }

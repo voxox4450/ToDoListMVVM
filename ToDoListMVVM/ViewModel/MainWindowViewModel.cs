@@ -2,16 +2,21 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Views;
+using ToDoListMVVM.Views;
 
 namespace ToDoListMVVM.ViewModel
 {
     public class MainWindowViewModel
     {
+        private IDialogService _dialogService = new DialogsServices();
         public ICommand ExitCommand { get; }
         public ICommand AddNoteComand { get; }
 
         public MainWindowViewModel()
+
         {
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(NextPage);
@@ -24,6 +29,7 @@ namespace ToDoListMVVM.ViewModel
 
         private void NextPage()
         {
+            _dialogService.ShowDialog();
         }
     }
 }

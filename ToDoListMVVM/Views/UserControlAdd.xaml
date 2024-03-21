@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="650"
     d:DesignWidth="1000"
+    Background="Violet"
     mc:Ignorable="d">
     <Grid x:Name="AddControl">
         <Grid.ColumnDefinitions>
