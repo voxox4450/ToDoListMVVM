@@ -6,3 +6,4 @@ poczytac dokumentacje
 ogbarnc DIE
 ogarnac toolkikt
 mvvmdialogs
+https://www.youtube.com/watch?v=S8hEjLahNtU
