@@ -120,7 +120,7 @@
             Grid.Column="2"
             Width="250"
             Height="50"
-            Command="{Binding AddNoteComand}"
+            Command="{Binding ExitAddCommand}"
             Content="Dodaj"
             FontSize="25"
             FontWeight="Bold" />

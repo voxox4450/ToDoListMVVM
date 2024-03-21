@@ -7,20 +7,31 @@ using System.Windows;
 using ToDoListMVVM.Interface;
 using ToDoListMVVM.Models;
 using ToDoListMVVM.Views;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ToDoListMVVM.Services
 {
     public class NoteService : INoteService
     {
+        private Window _dialog;
+
         public void ShowDialog()
         {
-            var dialog = new Window
+            _dialog = new Window
             {
                 Title = "Dodaj zadanie do ToDoList",
                 Content = new UserControlAdd(),
                 SizeToContent = SizeToContent.WidthAndHeight,
             };
-            dialog.ShowDialog();
+            _dialog.ShowDialog();
+        }
+
+        public void CloseDialog()
+        {
+            if (_dialog != null)
+            {
+                _dialog.Close();
+            }
         }
     }
 }

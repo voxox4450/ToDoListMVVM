@@ -11,6 +11,5 @@ using ToDoListMVVM.Models;
 namespace ToDoListMVVM.ViewModel
 {
     public class UserControlEditViewModel
-    {
-    }
+    { }
 }

@@ -13,13 +13,14 @@ namespace ToDoListMVVM.ViewModel
 {
     public class MainWindowViewModel
     {
-        private INoteService _dialogService = new NoteService();
+        private INoteService _addNote;
         public ICommand ExitCommand { get; }
+
         public ICommand AddNoteComand { get; }
 
-        public MainWindowViewModel()
-
+        public MainWindowViewModel(INoteService addNote)
         {
+            _addNote = addNote;
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(NextPage);
         }
@@ -31,7 +32,12 @@ namespace ToDoListMVVM.ViewModel
 
         private void NextPage()
         {
-            _dialogService.ShowDialog();
+            _addNote.ShowDialog();
+        }
+
+        private void CloseDialog()
+        {
+            _addNote.CloseDialog();
         }
     }
 }

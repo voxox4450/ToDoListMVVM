@@ -10,5 +10,7 @@ namespace ToDoListMVVM.Interface
     public interface INoteService
     {
         void ShowDialog();
+
+        void CloseDialog();
     }
 }
