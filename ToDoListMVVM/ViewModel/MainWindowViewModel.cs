@@ -5,13 +5,15 @@ using CommunityToolkit.Mvvm.Messaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
+using ToDoListMVVM.Interface;
+using ToDoListMVVM.Services;
 using ToDoListMVVM.Views;
 
 namespace ToDoListMVVM.ViewModel
 {
     public class MainWindowViewModel
     {
-        private IDialogService _dialogService = new DialogsServices();
+        private INoteService _dialogService = new NoteService();
         public ICommand ExitCommand { get; }
         public ICommand AddNoteComand { get; }
 

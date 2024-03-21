@@ -9,6 +9,6 @@ namespace ToDoListMVVM.Interface
 {
     public interface INoteService
     {
-        //void AddNote(Note note);
+        void ShowDialog();
     }
 }
