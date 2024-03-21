@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToDoListMVVM.Models
 {
-    public class Database
+    public class AppDbContext
     {
         public DbSet<Note>? Notes { get; set; }
         public DbSet<Status>? Statuses { get; set; }
