@@ -95,7 +95,6 @@
             FontSize="60" />
 
         <ComboBox
-            x:Name="prio"
             Grid.Row="4"
             Grid.Column="1"
             Width="380"
@@ -103,9 +102,10 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
+            ItemsSource="{Binding NotePrio}"
+            SelectedValue="{Binding SelectedPrio}"
             SelectedValuePath="Id" />
         <ComboBox
-            x:Name="status"
             Grid.Row="5"
             Grid.Column="1"
             Width="380"
@@ -113,6 +113,8 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
+            ItemsSource="{Binding NoteStatus}"
+            SelectedValue="{Binding SelectedStatus}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button

@@ -37,6 +37,10 @@ namespace ToDoListMVVM
                 .AddTransient<UserControlAddViewModel>()
                 .AddSingleton<INoteService, NoteService>()
                 .AddSingleton<INoteRepository, NoteRepository>()
+                .AddSingleton<IPriorityRepository, PriorityRepository>()
+                .AddSingleton<IPriorityService, PriorityService>()
+                .AddSingleton<IStatusRepository, StatusRepository>()
+                .AddSingleton<IStatusService, StatusService>()
                 .BuildServiceProvider());
 
             using var scope = Ioc.Default.CreateScope();

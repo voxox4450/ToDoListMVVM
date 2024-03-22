@@ -42,12 +42,12 @@ namespace ToDoListMVVM.Entities
 
             modelBuilder.Entity<Note>()
                 .HasOne(n => n.Priority)
-                .WithMany()
+                .WithMany(n => n.Notes)
                 .HasForeignKey(n => n.PriorityId);
 
             modelBuilder.Entity<Note>()
                 .HasOne(n => n.Status)
-                .WithMany()
+                .WithMany(n => n.Notes)
                 .HasForeignKey(n => n.StatusId);
 
             modelBuilder.Entity<Status>()
