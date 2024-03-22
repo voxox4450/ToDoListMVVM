@@ -1,33 +1,46 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
-using System.Data;
+
 using System.IO;
 using System.Windows;
 using ToDoListMVVM.Models;
 using ToDoListMVVM.ViewModel;
-using ToDoListMVVM.Views;
 using ToDoListMVVM.Interface;
 using ToDoListMVVM.Services;
 using ToDoListMVVM;
-using Microsoft.EntityFrameworkCore;
 using System;
 using ToDoListMVVM.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ToDoListMVVM
 {
     public partial class App : Application
     {
-        public IConfiguration Configuration { get; private set; }
-
         public App()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory());
 
-            using var dbContext = new AppDbContext();
+            Configuration = builder.Build();
+        }
 
+        public IConfiguration Configuration { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                .AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;"))
+                .AddTransient<MainWindowViewModel>()
+                .AddTransient<UserControlAddViewModel>()
+                .AddSingleton<INoteService, NoteService>()
+                .BuildServiceProvider());
+
+            using var scope = Ioc.Default.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            dbContext.Database.EnsureCreated();
             var priorities = new List<Priority>()
             {
                 new(){ Id = 0, Name = "Wysoki" },
@@ -51,22 +64,6 @@ namespace ToDoListMVVM
                 dbContext.AddRange(statuses);
                 dbContext.SaveChanges();
             }
-            Configuration = builder.Build();
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            var options = new DbContextOptionsBuilder<Entities.AppDbContext>()
-                .UseSqlServer(connectionString)
-                .Options;
-            Ioc.Default.ConfigureServices(
-                new ServiceCollection()
-                .AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString))
-                .AddTransient<MainWindowViewModel>()
-                .AddTransient<UserControlAddViewModel>()
-                .AddSingleton<INoteService, NoteService>()
-                .BuildServiceProvider());
         }
     }
 }
