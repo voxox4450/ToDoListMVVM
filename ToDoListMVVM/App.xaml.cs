@@ -12,6 +12,7 @@ using ToDoListMVVM;
 using System;
 using ToDoListMVVM.Entities;
 using Microsoft.EntityFrameworkCore;
+using ToDoListMVVM.Repositories;
 
 namespace ToDoListMVVM
 {
@@ -35,6 +36,7 @@ namespace ToDoListMVVM
                 .AddTransient<MainWindowViewModel>()
                 .AddTransient<UserControlAddViewModel>()
                 .AddSingleton<INoteService, NoteService>()
+                .AddSingleton<INoteRepository, NoteRepository>()
                 .BuildServiceProvider());
 
             using var scope = Ioc.Default.CreateScope();

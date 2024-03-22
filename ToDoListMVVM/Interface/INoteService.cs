@@ -12,5 +12,13 @@ namespace ToDoListMVVM.Interface
         void ShowDialog();
 
         void CloseDialog();
+
+        void Remove(int id);
+
+        Note FindNote(int id);
+
+        IEnumerable<Note> GetAll();
+
+        Note Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
     }
 }

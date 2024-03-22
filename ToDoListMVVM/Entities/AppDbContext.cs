@@ -66,21 +66,5 @@ namespace ToDoListMVVM.Entities
                 .Property(x => x.Name)
                 .HasMaxLength(30);
         }
-
-        //public List<Note> GetNotes()
-        //{
-        //    using (var context = new AppDbContext())
-        //    {
-        //        return context.Notes.ToList();
-        //    }
-        //}
-
-        //public List<Note> GetNotesWithDetails()
-        //{
-        //    using (var context = new AppDbContext())
-        //    {
-        //        return context.Notes.Include(n => n.Priority).Include(n => n.Status).ToList();
-        //    }
-        //}
     }
 }
