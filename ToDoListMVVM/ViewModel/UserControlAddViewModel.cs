@@ -26,6 +26,8 @@ namespace ToDoListMVVM.ViewModel
         private readonly IStatusService _statusService;
         public List<Priority> NotePrio { get; set; }
         public List<Status> NoteStatus { get; set; }
+        public DateTime StartDateNote { get; set; }
+        public DateTime EndDateNote { get; set; }
 
         public UserControlAddViewModel(INoteService noteService, IPriorityService priorityService, IStatusService statusService)
         {

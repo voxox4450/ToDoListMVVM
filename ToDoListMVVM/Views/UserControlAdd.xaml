@@ -83,15 +83,16 @@
             x:Name="start"
             Grid.Row="2"
             Grid.Column="1"
+            SelectedDate="{Binding StartDateNote}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="60" />
         <DatePicker
-            x:Name="end"
             Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            SelectedDate="{Binding EndDateNote}"
             FontSize="60" />
 
         <ComboBox
