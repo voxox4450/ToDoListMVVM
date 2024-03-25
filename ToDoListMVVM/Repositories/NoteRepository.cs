@@ -40,7 +40,7 @@ namespace ToDoListMVVM.Repositories
         public IEnumerable<Note> GetAll()
         {
             _noteRepository.ChangeTracker.LazyLoadingEnabled = false;
-            return _noteRepository.Notes.Include(x => x.Status).ToList();
+            return _noteRepository.Notes.Include(x => x.Priority).Include(x => x.Status).ToList();
         }
     }
 }
