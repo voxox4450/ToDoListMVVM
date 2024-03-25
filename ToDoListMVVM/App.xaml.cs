@@ -35,6 +35,7 @@ namespace ToDoListMVVM
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;"))
                 .AddTransient<MainWindowViewModel>()
                 .AddTransient<UserControlAddViewModel>()
+                .AddTransient<UserControlEditViewModel>()
                 .AddSingleton<INoteService, NoteService>()
                 .AddSingleton<INoteRepository, NoteRepository>()
                 .AddSingleton<IPriorityRepository, PriorityRepository>()

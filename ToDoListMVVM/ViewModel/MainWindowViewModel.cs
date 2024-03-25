@@ -21,16 +21,16 @@ namespace ToDoListMVVM.ViewModel
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(NextPage);
             DeleteCommand = new RelayCommand(DeletePage);
+            EditCommand = new RelayCommand(EditPage);
             CollectionList = new ObservableCollection<Note>(_noteService.GetAll());
         }
 
         private readonly INoteService _noteService;
 
-        //private Note _selectedItem;
         public ICommand ExitCommand { get; }
-
         public ICommand AddNoteComand { get; }
         public ICommand DeleteCommand { get; }
+        public ICommand EditCommand { get; }
         public Note SelectedItem { get; set; }
 
         public ObservableCollection<Note> CollectionList { get; set; }
@@ -53,6 +53,16 @@ namespace ToDoListMVVM.ViewModel
         private void DeletePage()
         {
             _noteService.Remove(SelectedItem);
+            CollectionList.Clear();
+            foreach (var note in _noteService.GetAll())
+            {
+                CollectionList.Add(note);
+            }
+        }
+
+        private void EditPage()
+        {
+            _noteService.ShowEdit();
             CollectionList.Clear();
             foreach (var note in _noteService.GetAll())
             {

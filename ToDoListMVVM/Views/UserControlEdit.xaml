@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="650"
     d:DesignWidth="1000"
+    Background="Violet"
     mc:Ignorable="d">
     <Grid x:Name="EditControl">
         <Grid.ColumnDefinitions>
@@ -78,21 +79,24 @@
             x:Name="content"
             Grid.Row="1"
             Grid.Column="1"
-            FontSize="15" />
+            FontSize="15"
+            Text="{Binding TextEdit}" />
         <DatePicker
             x:Name="start"
             Grid.Row="2"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="60" />
+            FontSize="60"
+            SelectedDate="{Binding StartDateEdit}" />
         <DatePicker
             x:Name="end"
             Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="60" />
+            FontSize="60"
+            SelectedDate="{Binding EndDateEdit}" />
         <ComboBox
             x:Name="prio"
             Grid.Row="4"
@@ -102,6 +106,8 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
+            ItemsSource="{Binding EditPrio}"
+            SelectedValue="{Binding SelectedEditPrio}"
             SelectedValuePath="Id" />
         <ComboBox
             x:Name="status"
@@ -112,6 +118,7 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
+            ItemsSource="{Binding EditStatus}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button
@@ -119,6 +126,7 @@
             Grid.Column="2"
             Width="250"
             Height="50"
+            Command="{Binding ExitEditCommand}"
             Content="Edytuj"
             FontSize="25"
             FontWeight="Bold" />

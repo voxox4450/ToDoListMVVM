@@ -23,7 +23,6 @@ namespace ToDoListMVVM.ViewModel
     {
         public UserControlAddViewModel(INoteService noteService, IPriorityService priorityService, IStatusService statusService)
         {
-            CollectionList = new ObservableCollection<Note>();
             _noteService = noteService;
             _priorityService = priorityService;
             _statusService = statusService;
@@ -47,11 +46,10 @@ namespace ToDoListMVVM.ViewModel
         public DateTime StartDateNote { get; set; }
         public DateTime EndDateNote { get; set; }
         public string TextNote { get; set; }
-        public ObservableCollection<Note> CollectionList { get; set; }
 
         private void ExitCommand()
         {
-            var newNote = _noteService.Add(TextNote, StartDateNote, EndDateNote, SelectedPrio, SelectedStatus);
+            _noteService.Add(TextNote, StartDateNote, EndDateNote, SelectedPrio, SelectedStatus);
             _noteService.CloseDialog();
         }
     }

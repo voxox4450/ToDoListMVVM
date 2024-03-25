@@ -28,6 +28,17 @@ namespace ToDoListMVVM.Services
             _dialog.ShowDialog();
         }
 
+        public void ShowEdit()
+        {
+            _dialog = new Window
+            {
+                Title = "Edytuj zadanie",
+                Content = new UserControlEdit(),
+                SizeToContent = SizeToContent.WidthAndHeight,
+            };
+            _dialog.ShowDialog();
+        }
+
         public void CloseDialog()
         {
             if (_dialog != null)
@@ -67,6 +78,12 @@ namespace ToDoListMVVM.Services
         public IEnumerable<Note> GetAll()
         {
             return _noteRepository.GetAll();
+        }
+
+        public Note Edit(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
+        {
+            var newNote = new Note();
+            return newNote;
         }
     }
 }

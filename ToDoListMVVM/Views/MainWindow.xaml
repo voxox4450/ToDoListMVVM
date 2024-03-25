@@ -52,6 +52,7 @@
                 Height="80"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
+                Command="{Binding EditCommand}"
                 Content="Edytuj"
                 FontSize="25" />
             <Button
