@@ -107,6 +107,7 @@
             DisplayMemberPath="Name"
             FontSize="60"
             ItemsSource="{Binding EditPrio}"
+            SelectedValue="{Binding SelectedPrio}"
             SelectedValuePath="Id" />
         <ComboBox
             x:Name="status"
@@ -118,6 +119,7 @@
             DisplayMemberPath="Name"
             FontSize="60"
             ItemsSource="{Binding EditStatus}"
+            SelectedValue="{Binding SelectedStatus}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button

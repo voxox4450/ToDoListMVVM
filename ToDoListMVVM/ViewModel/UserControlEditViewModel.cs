@@ -20,7 +20,7 @@ namespace ToDoListMVVM.ViewModel
         public UserControlEditViewModel(Note note)
         {
             _noteService = Ioc.Default.GetRequiredService<INoteService>();
-            _priorityService = Ioc.Default.GetRequiredService<IPriorityService>();
+            _priorityService =  Ioc.Default.GetRequiredService<IPriorityService>();
             _statusService = Ioc.Default.GetRequiredService<IStatusService>();
             _noteToEdit = note;
             TextEdit = _noteToEdit.ContentText;
@@ -34,6 +34,7 @@ namespace ToDoListMVVM.ViewModel
 
             ExitEditCommand = new RelayCommand(ExitCommand);
             _noteToEdit = note;
+            
         }
 
         private readonly INoteService _noteService;
