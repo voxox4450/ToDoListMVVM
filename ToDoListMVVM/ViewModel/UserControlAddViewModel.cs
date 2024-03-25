@@ -49,8 +49,15 @@ namespace ToDoListMVVM.ViewModel
 
         private void ExitCommand()
         {
-            _noteService.Add(TextNote, StartDateNote, EndDateNote, SelectedPrio, SelectedStatus);
-            _noteService.CloseDialog();
+            if (StartDateNote > EndDateNote)
+            {
+                MessageBox.Show("Błąd: Data rozpoczęcia musi być mniejsza niż data zakończenia.");
+            }
+            else
+            {
+                _noteService.Add(TextNote, StartDateNote, EndDateNote, SelectedPrio, SelectedStatus);
+                _noteService.CloseDialog();
+            }
         }
     }
 }

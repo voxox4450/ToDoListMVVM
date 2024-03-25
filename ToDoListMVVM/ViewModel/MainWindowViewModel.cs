@@ -52,21 +52,27 @@ namespace ToDoListMVVM.ViewModel
 
         private void DeletePage()
         {
-            _noteService.Remove(SelectedItem);
-            CollectionList.Clear();
-            foreach (var note in _noteService.GetAll())
+            if (SelectedItem != null)
             {
-                CollectionList.Add(note);
+                _noteService.Remove(SelectedItem);
+                CollectionList.Clear();
+                foreach (var note in _noteService.GetAll())
+                {
+                    CollectionList.Add(note);
+                }
             }
         }
 
         private void EditPage()
         {
-            _noteService.ShowEdit(SelectedItem);
-            CollectionList.Clear();
-            foreach (var note in _noteService.GetAll())
+            if (SelectedItem != null)
             {
-                CollectionList.Add(note);
+                _noteService.ShowEdit(SelectedItem);
+                CollectionList.Clear();
+                foreach (var note in _noteService.GetAll())
+                {
+                    CollectionList.Add(note);
+                }
             }
         }
     }

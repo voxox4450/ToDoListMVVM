@@ -72,7 +72,9 @@ namespace ToDoListMVVM.Services
             existingNote.EndDate = noteEndDate;
             existingNote.PriorityId = notePrio;
             existingNote.StatusId = noteSta;
+
             _noteRepository.Update(existingNote);
+
             return existingNote;
         }
 
