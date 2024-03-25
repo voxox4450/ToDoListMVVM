@@ -43,11 +43,7 @@ namespace ToDoListMVVM.ViewModel
         private void NextPage()
         {
             _noteService.ShowAdd();
-            CollectionList.Clear();
-            foreach (var note in _noteService.GetAll())
-            {
-                CollectionList.Add(note);
-            }
+            refresh();
         }
 
         private void DeletePage()
@@ -55,11 +51,7 @@ namespace ToDoListMVVM.ViewModel
             if (SelectedItem != null)
             {
                 _noteService.Remove(SelectedItem);
-                CollectionList.Clear();
-                foreach (var note in _noteService.GetAll())
-                {
-                    CollectionList.Add(note);
-                }
+                refresh();
             }
         }
 
@@ -68,11 +60,16 @@ namespace ToDoListMVVM.ViewModel
             if (SelectedItem != null)
             {
                 _noteService.ShowEdit(SelectedItem);
-                CollectionList.Clear();
-                foreach (var note in _noteService.GetAll())
-                {
-                    CollectionList.Add(note);
-                }
+                refresh();
+            }
+        }
+
+        private void refresh()
+        {
+            CollectionList.Clear();
+            foreach (var note in _noteService.GetAll())
+            {
+                CollectionList.Add(note);
             }
         }
     }
