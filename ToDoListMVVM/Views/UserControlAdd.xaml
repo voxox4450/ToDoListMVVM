@@ -116,7 +116,6 @@
             DisplayMemberPath="Name"
             FontSize="60"
             ItemsSource="{Binding NoteStatus}"
-            SelectedValue="{Binding SelectedStatus}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button

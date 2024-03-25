@@ -13,7 +13,7 @@ namespace ToDoListMVVM.Interface
 
         void CloseDialog();
 
-        void Remove(int id);
+        void Remove(Note note);
 
         Note FindNote(int id);
 

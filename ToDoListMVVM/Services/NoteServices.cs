@@ -54,9 +54,9 @@ namespace ToDoListMVVM.Services
             return newNote;
         }
 
-        public void Remove(int id)
+        public void Remove(Note note)
         {
-            _noteRepository.Delete(_noteRepository.Find(id));
+            _noteRepository.Delete(note);
         }
 
         public Note FindNote(int id)
