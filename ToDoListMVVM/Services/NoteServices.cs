@@ -17,7 +17,7 @@ namespace ToDoListMVVM.Services
         private Window _dialog;
         private readonly INoteRepository _noteRepository = noteRepository;
 
-        public void ShowDialog()
+        public void ShowAdd()
         {
             _dialog = new Window
             {
@@ -28,12 +28,12 @@ namespace ToDoListMVVM.Services
             _dialog.ShowDialog();
         }
 
-        public void ShowEdit()
+        public void ShowEdit(Note note)
         {
             _dialog = new Window
             {
                 Title = "Edytuj zadanie",
-                Content = new UserControlEdit(),
+                Content = new UserControlEdit(note),
                 SizeToContent = SizeToContent.WidthAndHeight,
             };
             _dialog.ShowDialog();
@@ -65,6 +65,17 @@ namespace ToDoListMVVM.Services
             return newNote;
         }
 
+        public Note Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
+        {
+            existingNote.ContentText = noteContent;
+            existingNote.StartDate = noteStartDate;
+            existingNote.EndDate = noteEndDate;
+            existingNote.PriorityId = notePrio;
+            existingNote.StatusId = noteSta;
+            _noteRepository.Update(existingNote);
+            return existingNote;
+        }
+
         public void Remove(Note note)
         {
             _noteRepository.Delete(note);
@@ -78,12 +89,6 @@ namespace ToDoListMVVM.Services
         public IEnumerable<Note> GetAll()
         {
             return _noteRepository.GetAll();
-        }
-
-        public Note Edit(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
-        {
-            var newNote = new Note();
-            return newNote;
         }
     }
 }

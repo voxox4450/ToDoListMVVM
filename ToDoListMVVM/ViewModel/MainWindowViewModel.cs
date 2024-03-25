@@ -42,7 +42,7 @@ namespace ToDoListMVVM.ViewModel
 
         private void NextPage()
         {
-            _noteService.ShowDialog();
+            _noteService.ShowAdd();
             CollectionList.Clear();
             foreach (var note in _noteService.GetAll())
             {
@@ -62,7 +62,7 @@ namespace ToDoListMVVM.ViewModel
 
         private void EditPage()
         {
-            _noteService.ShowEdit();
+            _noteService.ShowEdit(SelectedItem);
             CollectionList.Clear();
             foreach (var note in _noteService.GetAll())
             {

@@ -1,9 +1,11 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Input;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,18 +17,23 @@ namespace ToDoListMVVM.ViewModel
 {
     public class UserControlEditViewModel
     {
-        public UserControlEditViewModel(INoteService noteService, IPriorityService priorityService, IStatusService statusService)
+        public UserControlEditViewModel(Note note)
         {
-            _noteService = noteService;
-            _priorityService = priorityService;
-            _statusService = statusService;
-            TextEdit = string.Empty;
-            StartDateEdit = DateTime.Today;
-            EndDateEdit = DateTime.Today;
+            _noteService = Ioc.Default.GetRequiredService<INoteService>();
+            _priorityService = Ioc.Default.GetRequiredService<IPriorityService>();
+            _statusService = Ioc.Default.GetRequiredService<IStatusService>();
+            _noteToEdit = note;
+            TextEdit = _noteToEdit.ContentText;
+            StartDateEdit = _noteToEdit.StartDate;
+            EndDateEdit = _noteToEdit.EndDate;
+            SelectedPrio = _noteToEdit.PriorityId;
+            SelectedStatus = _noteToEdit.StatusId;
+
             EditPrio = [.. _priorityService.GetAll()];
             EditStatus = [.. _statusService.GetAll()];
 
             ExitEditCommand = new RelayCommand(ExitCommand);
+            _noteToEdit = note;
         }
 
         private readonly INoteService _noteService;
@@ -41,10 +48,11 @@ namespace ToDoListMVVM.ViewModel
         public DateTime EndDateEdit { get; set; }
         public string TextEdit { get; set; }
         public ICommand ExitEditCommand { get; }
+        private readonly Note _noteToEdit;
 
         private void ExitCommand()
         {
-            _noteService.Edit(TextEdit, StartDateEdit, EndDateEdit, SelectedPrio, SelectedStatus);
+            _noteService.Edit(_noteToEdit, TextEdit, StartDateEdit, EndDateEdit, SelectedPrio, SelectedStatus);
             _noteService.CloseDialog();
         }
     }

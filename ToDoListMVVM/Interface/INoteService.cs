@@ -9,9 +9,9 @@ namespace ToDoListMVVM.Interface
 {
     public interface INoteService
     {
-        void ShowDialog();
+        void ShowAdd();
 
-        void ShowEdit();
+        void ShowEdit(Note note);
 
         void CloseDialog();
 
@@ -23,6 +23,6 @@ namespace ToDoListMVVM.Interface
 
         Note Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
 
-        Note Edit(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
+        Note Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
     }
 }

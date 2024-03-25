@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDoListMVVM.Models;
 using ToDoListMVVM.ViewModel;
 
 namespace ToDoListMVVM.Views
@@ -22,10 +23,11 @@ namespace ToDoListMVVM.Views
     /// </summary>
     public partial class UserControlEdit : UserControl
     {
-        public UserControlEdit()
+        public UserControlEdit(Note note)
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetRequiredService<UserControlEditViewModel>();
+            //DataContext = Ioc.Default.GetRequiredService<UserControlEditViewModel>();
+            DataContext = new UserControlEditViewModel(note);
         }
     }
 }

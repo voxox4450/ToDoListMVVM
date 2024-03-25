@@ -107,7 +107,6 @@
             DisplayMemberPath="Name"
             FontSize="60"
             ItemsSource="{Binding EditPrio}"
-            SelectedValue="{Binding SelectedEditPrio}"
             SelectedValuePath="Id" />
         <ComboBox
             x:Name="status"
