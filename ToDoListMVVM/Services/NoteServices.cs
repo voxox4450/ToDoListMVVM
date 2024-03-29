@@ -41,7 +41,7 @@ namespace ToDoListMVVM.Services
             }
         }
 
-        public Note Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
+        public void Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
         {
             var newNote = new Note()
             {
@@ -56,10 +56,9 @@ namespace ToDoListMVVM.Services
                 StatusId = noteSta,
             };
             _noteRepository.Add(newNote);
-            return newNote;
         }
 
-        public Note Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
+        public void Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
         {
             existingNote.ContentText = noteContent;
             existingNote.StartDate = noteStartDate;
@@ -68,8 +67,6 @@ namespace ToDoListMVVM.Services
             existingNote.StatusId = noteSta;
 
             _noteRepository.Update(existingNote);
-
-            return existingNote;
         }
 
         public void Remove(Note note)

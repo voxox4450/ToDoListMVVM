@@ -8,8 +8,6 @@ using ToDoListMVVM.Models;
 using ToDoListMVVM.ViewModel;
 using ToDoListMVVM.Interface;
 using ToDoListMVVM.Services;
-using ToDoListMVVM;
-using System;
 using ToDoListMVVM.Entities;
 using Microsoft.EntityFrameworkCore;
 using ToDoListMVVM.Repositories;
@@ -36,12 +34,12 @@ namespace ToDoListMVVM
                 .AddTransient<MainWindowViewModel>()
                 .AddTransient<UserControlAddViewModel>()
                 .AddTransient<UserControlEditViewModel>()
-                .AddSingleton<INoteService, NoteService>()
-                .AddSingleton<INoteRepository, NoteRepository>()
-                .AddSingleton<IPriorityRepository, PriorityRepository>()
-                .AddSingleton<IPriorityService, PriorityService>()
-                .AddSingleton<IStatusRepository, StatusRepository>()
-                .AddSingleton<IStatusService, StatusService>()
+                .AddScoped<INoteService, NoteService>()
+                .AddScoped<INoteRepository, NoteRepository>()
+                .AddScoped<IPriorityService, PriorityService>()
+                .AddScoped<IPriorityRepository, PriorityRepository>()
+                .AddScoped<IStatusService, StatusService>()
+                .AddScoped<IStatusRepository, StatusRepository>()
                 .BuildServiceProvider());
 
             using var scope = Ioc.Default.CreateScope();

@@ -14,8 +14,8 @@ namespace ToDoListMVVM.Interface
 
         IEnumerable<Note> GetAll();
 
-        Note Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
+        void Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
 
-        Note Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
+        void Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta);
     }
 }
