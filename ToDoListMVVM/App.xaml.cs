@@ -18,8 +18,8 @@ namespace ToDoListMVVM
         public App()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                .SetBasePath(Directory.GetCurrentDirectory());
+            //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             Configuration = builder.Build();
         }
@@ -33,11 +33,14 @@ namespace ToDoListMVVM
 
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
-                .AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
+                .AddDbContext<AppDbContext>(options => options
+                    .UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;"))
+                //.AddDbContext<AppDbContext>(options.UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;")
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
                 .AddTransient<MainViewModel>()
                 .AddTransient<AddViewModel>()
                 .AddTransient<EditViewModel>()
+                .AddTransient<SeederContext>()
                 .AddScoped<INoteService, NoteService>()
                 .AddScoped<INoteRepository, NoteRepository>()
                 .AddScoped<IPriorityService, PriorityService>()
@@ -45,35 +48,6 @@ namespace ToDoListMVVM
                 .AddScoped<IStatusService, StatusService>()
                 .AddScoped<IStatusRepository, StatusRepository>()
                 .BuildServiceProvider());
-
-            //TODO: przeniesc seedowanie do nowej klasy, tutaj ją tylko wywołać
-            using var scope = Ioc.Default.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-            dbContext.Database.EnsureCreated();
-            var priorities = new List<Priority>()
-            {
-                new(){ Id = 0, Name = "Wysoki" },
-                new(){ Id = 1, Name = "Średni" },
-                new(){ Id = 2, Name = "Niski" }
-            };
-            if (!dbContext.Priorities.Any())
-            {
-                dbContext.AddRange(priorities);
-                dbContext.SaveChanges();
-            }
-
-            var statuses = new List<Status>()
-            {
-                new(){ Id = 0, Name = "Ukończono" },
-                new(){ Id = 1, Name = "Rozpoczęto" },
-                new(){ Id = 2, Name = "Dodano" },
-            };
-            if (!dbContext.Statuses.Any())
-            {
-                dbContext.AddRange(statuses);
-                dbContext.SaveChanges();
-            }
         }
     }
 }
