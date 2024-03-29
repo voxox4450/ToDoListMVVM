@@ -1,13 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ToDoListMVVM.Interface;
@@ -46,7 +38,7 @@ namespace ToDoListMVVM.ViewModel
 
         public DateTime StartDateEdit { get; set; }
         public DateTime EndDateEdit { get; set; }
-        public string TextEdit { get; set; }
+        public string? TextEdit { get; set; }
         public ICommand ExitEditCommand { get; }
         private readonly Note _noteToEdit;
 
@@ -58,7 +50,7 @@ namespace ToDoListMVVM.ViewModel
             }
             else
             {
-                _noteService.Edit(_noteToEdit, TextEdit, StartDateEdit, EndDateEdit, SelectedPrio, SelectedStatus);
+                _noteService.Edit(_noteToEdit, TextEdit!, StartDateEdit, EndDateEdit, SelectedPrio, SelectedStatus);
                 _noteService.CloseDialog();
             }
         }

@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using ToDoListMVVM.Interface;
 using ToDoListMVVM.Models;
 using ToDoListMVVM.Views;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ToDoListMVVM.Services
 {
     public class NoteService(INoteRepository noteRepository) : INoteService
 
     {
-        private Window _dialog;
+        private Window? _dialog;
         private readonly INoteRepository _noteRepository = noteRepository;
 
         public void ShowAdd()
@@ -81,11 +75,6 @@ namespace ToDoListMVVM.Services
         public void Remove(Note note)
         {
             _noteRepository.Delete(note);
-        }
-
-        public Note FindNote(int id)
-        {
-            return _noteRepository.Find(id);
         }
 
         public IEnumerable<Note> GetAll()

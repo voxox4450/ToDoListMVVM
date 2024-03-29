@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoListMVVM.Models;
+﻿using ToDoListMVVM.Models;
 
 namespace ToDoListMVVM.Interface
 {
@@ -16,8 +11,6 @@ namespace ToDoListMVVM.Interface
         void CloseDialog();
 
         void Remove(Note note);
-
-        Note FindNote(int id);
 
         IEnumerable<Note> GetAll();
 

@@ -2,14 +2,9 @@
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
 using ToDoListMVVM.Interface;
 using ToDoListMVVM.Models;
-using ToDoListMVVM.Services;
-using ToDoListMVVM.Views;
 
 namespace ToDoListMVVM.ViewModel
 {
@@ -31,7 +26,7 @@ namespace ToDoListMVVM.ViewModel
         public ICommand AddNoteComand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand EditCommand { get; }
-        public Note SelectedItem { get; set; }
+        public Note? SelectedItem { get; set; }
 
         public ObservableCollection<Note> CollectionList { get; set; }
 

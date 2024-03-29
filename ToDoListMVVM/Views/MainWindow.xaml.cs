@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using System.Windows;
 using ToDoListMVVM.ViewModel;
-using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ToDoListMVVM.Views
 {

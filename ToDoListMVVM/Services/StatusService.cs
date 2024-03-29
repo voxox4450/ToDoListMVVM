@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoListMVVM.Entities;
-using ToDoListMVVM.Interface;
+﻿using ToDoListMVVM.Interface;
 using ToDoListMVVM.Models;
-using ToDoListMVVM.Repositories;
 
 namespace ToDoListMVVM.Services
 {
