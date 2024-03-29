@@ -4,11 +4,11 @@ namespace ToDoListMVVM.Interface
 {
     public interface INoteService
     {
-        void ShowAdd();
+        //void ShowAdd();
 
-        void ShowEdit(Note note);
+        //void ShowEdit(Note note);
 
-        void CloseDialog();
+        //void CloseDialog();
 
         void Remove(Note note);
 

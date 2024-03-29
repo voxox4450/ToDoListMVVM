@@ -10,11 +10,12 @@ namespace ToDoListMVVM.ViewModel
     public class AddViewModel
     {
         private readonly INoteService _noteService;
+        private readonly IDialogService _dialogService;
 
-        public AddViewModel(INoteService noteService, IPriorityService priorityService, IStatusService statusService)
+        public AddViewModel(INoteService noteService, IPriorityService priorityService, IStatusService statusService, IDialogService dialogService)
         {
             _noteService = noteService;
-
+            _dialogService = dialogService;
             TextNote = string.Empty;
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
@@ -44,7 +45,7 @@ namespace ToDoListMVVM.ViewModel
             else
             {
                 _noteService.Add(TextNote, StartDate, EndDate, SelectedPriorities, SelectedStatuses);
-                _noteService.CloseDialog();
+                _dialogService.CloseDialog();
             }
         }
     }

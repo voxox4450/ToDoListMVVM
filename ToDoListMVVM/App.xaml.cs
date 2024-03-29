@@ -47,6 +47,7 @@ namespace ToDoListMVVM
                 .AddScoped<IPriorityRepository, PriorityRepository>()
                 .AddScoped<IStatusService, StatusService>()
                 .AddScoped<IStatusRepository, StatusRepository>()
+                .AddScoped<IDialogService, DialogService>()
                 .BuildServiceProvider());
         }
     }

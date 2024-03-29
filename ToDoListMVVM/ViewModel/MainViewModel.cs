@@ -11,8 +11,9 @@ namespace ToDoListMVVM.ViewModel
     public class MainViewModel : ObservableObject
     {
         private readonly INoteService _noteService;
+        private readonly IDialogService _dialogService;
 
-        public MainViewModel(INoteService noteService)
+        public MainViewModel(INoteService noteService, IDialogService dialogService)
         {
             _noteService = noteService;
 
@@ -23,6 +24,7 @@ namespace ToDoListMVVM.ViewModel
 
             CollectionList = new ObservableCollection<Note>(_noteService.GetAll());
             _noteService = noteService;
+            _dialogService = dialogService;
         }
 
         public ICommand ExitCommand { get; }
@@ -39,7 +41,7 @@ namespace ToDoListMVVM.ViewModel
 
         private void NextPage()
         {
-            _noteService.ShowAdd();
+            _dialogService.ShowAdd();
             Refresh();
         }
 
@@ -61,7 +63,7 @@ namespace ToDoListMVVM.ViewModel
                 return;
             }
 
-            _noteService.ShowEdit(SelectedItem);
+            _dialogService.ShowEdit(SelectedItem);
 
             //TODO: nie pobieraj wszystkiego z bazy danych lecz odswiezaj ten element na interfejsie
             Refresh();

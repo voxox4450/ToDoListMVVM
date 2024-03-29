@@ -13,12 +13,14 @@ namespace ToDoListMVVM.ViewModel
         private readonly INoteService _noteService;
         private readonly IPriorityService _priorityService;
         private readonly IStatusService _statusService;
+        private readonly IDialogService _dialogService;
 
         public EditViewModel(Note note)
         {
             _noteService = Ioc.Default.GetRequiredService<INoteService>();
             _priorityService = Ioc.Default.GetRequiredService<IPriorityService>();
             _statusService = Ioc.Default.GetRequiredService<IStatusService>();
+            _dialogService = Ioc.Default.GetRequiredService<IDialogService>();
             _noteToEdit = note;
             TextEdit = _noteToEdit.ContentText;
             StartDate = _noteToEdit.StartDate;
@@ -53,7 +55,7 @@ namespace ToDoListMVVM.ViewModel
             else
             {
                 _noteService.Edit(_noteToEdit, TextEdit!, StartDate, EndDate, SelectedPriorities, SelectedStatuses);
-                _noteService.CloseDialog();
+                _dialogService.CloseDialog();
             }
         }
     }
