@@ -11,35 +11,39 @@ namespace ToDoListMVVM.Services
         private readonly INoteRepository _noteRepository = noteRepository;
 
         //TODO: parametrem ma byc notatka
-        public void Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
+        public void Add(string Content,
+            DateTime StartDate,
+            DateTime EndDate,
+            int Priority,
+            int Statuses)
         {
             var newNote = new Note()
             {
-                ContentText = noteContent,
-                StartDate = noteStartDate,
+                ContentText = Content,
+                StartDate = StartDate,
 
-                EndDate = noteEndDate,
+                EndDate = EndDate,
 
-                PriorityId = notePrio,
+                PriorityId = Priority,
 
-                StatusId = noteSta,
+                StatusId = Statuses,
             };
             _noteRepository.Add(newNote);
         }
 
         //TODO: parametrem ma byc notatka
         public void Edit(Note existingNote,
-            string noteContent,
-            DateTime noteStartDate,
-            DateTime noteEndDate,
-            int notePrio,
-            int noteSta)
+            string Content,
+            DateTime StartDate,
+            DateTime EndDate,
+            int Priority,
+            int Statuses)
         {
-            existingNote.ContentText = noteContent;
-            existingNote.StartDate = noteStartDate;
-            existingNote.EndDate = noteEndDate;
-            existingNote.PriorityId = notePrio;
-            existingNote.StatusId = noteSta;
+            existingNote.ContentText = Content;
+            existingNote.StartDate = StartDate;
+            existingNote.EndDate = EndDate;
+            existingNote.PriorityId = Priority;
+            existingNote.StatusId = Statuses;
 
             _noteRepository.Update(existingNote);
         }
