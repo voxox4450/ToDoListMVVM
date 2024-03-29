@@ -1,6 +1,6 @@
 ﻿using System.Windows;
+using ToDoListMVVM.Entities;
 using ToDoListMVVM.Interface;
-using ToDoListMVVM.Models;
 using ToDoListMVVM.Views;
 
 namespace ToDoListMVVM.Services
@@ -11,6 +11,7 @@ namespace ToDoListMVVM.Services
         private Window? _dialog;
         private readonly INoteRepository _noteRepository = noteRepository;
 
+        //TODO: przeniesc np do innego serwisu
         public void ShowAdd()
         {
             _dialog = new Window
@@ -35,18 +36,15 @@ namespace ToDoListMVVM.Services
 
         public void CloseDialog()
         {
-            if (_dialog != null)
-            {
-                _dialog.Close();
-            }
+            _dialog?.Close();
         }
 
+        //TODO: parametrem ma byc notatka
         public void Add(string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
         {
             var newNote = new Note()
             {
                 ContentText = noteContent,
-
                 StartDate = noteStartDate,
 
                 EndDate = noteEndDate,
@@ -58,7 +56,13 @@ namespace ToDoListMVVM.Services
             _noteRepository.Add(newNote);
         }
 
-        public void Edit(Note existingNote, string noteContent, DateTime noteStartDate, DateTime noteEndDate, int notePrio, int noteSta)
+        //TODO: parametrem ma byc notatka
+        public void Edit(Note existingNote,
+            string noteContent,
+            DateTime noteStartDate,
+            DateTime noteEndDate,
+            int notePrio,
+            int noteSta)
         {
             existingNote.ContentText = noteContent;
             existingNote.StartDate = noteStartDate;

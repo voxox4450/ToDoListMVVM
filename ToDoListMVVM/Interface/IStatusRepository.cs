@@ -1,4 +1,4 @@
-﻿using ToDoListMVVM.Models;
+﻿using ToDoListMVVM.Entities;
 
 namespace ToDoListMVVM.Interface
 {

@@ -12,7 +12,7 @@ namespace ToDoListMVVM.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>();
+            DataContext = Ioc.Default.GetRequiredService<MainViewModel>();
         }
     }
 }

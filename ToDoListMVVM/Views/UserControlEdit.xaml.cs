@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using ToDoListMVVM.Models;
+using ToDoListMVVM.Entities;
 using ToDoListMVVM.ViewModel;
 
 namespace ToDoListMVVM.Views
@@ -12,7 +12,7 @@ namespace ToDoListMVVM.Views
         public UserControlEdit(Note note)
         {
             InitializeComponent();
-            DataContext = new UserControlEditViewModel(note);
+            DataContext = new EditViewModel(note);
         }
     }
 }

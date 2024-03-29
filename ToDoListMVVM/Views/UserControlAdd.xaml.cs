@@ -12,7 +12,7 @@ namespace ToDoListMVVM.Views
         public UserControlAdd()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetRequiredService<UserControlAddViewModel>();
+            DataContext = Ioc.Default.GetRequiredService<AddViewModel>();
         }
     }
 }

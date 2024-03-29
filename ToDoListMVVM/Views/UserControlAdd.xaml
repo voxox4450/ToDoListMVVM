@@ -87,14 +87,14 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="60"
-            SelectedDate="{Binding StartDateNote}" />
+            SelectedDate="{Binding StartDate}" />
         <DatePicker
             Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="60"
-            SelectedDate="{Binding EndDateNote}" />
+            SelectedDate="{Binding EndDate}" />
 
         <ComboBox
             Grid.Row="4"
@@ -104,8 +104,8 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
-            ItemsSource="{Binding NotePrio}"
-            SelectedValue="{Binding SelectedPrio}"
+            ItemsSource="{Binding Priorities}"
+            SelectedValue="{Binding SelectedPriorities}"
             SelectedValuePath="Id" />
         <ComboBox
             Grid.Row="5"
@@ -115,8 +115,8 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
-            ItemsSource="{Binding NoteStatus}"
-            SelectedValue="{Binding SelectedStatus}"
+            ItemsSource="{Binding Statuses}"
+            SelectedValue="{Binding SelectedStatuses}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button
@@ -124,7 +124,7 @@
             Grid.Column="2"
             Width="250"
             Height="50"
-            Command="{Binding ExitAddCommand}"
+            Command="{Binding AddCommand}"
             Content="Dodaj"
             FontSize="25"
             FontWeight="Bold" />

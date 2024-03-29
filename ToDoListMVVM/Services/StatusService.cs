@@ -1,5 +1,5 @@
-﻿using ToDoListMVVM.Interface;
-using ToDoListMVVM.Models;
+﻿using ToDoListMVVM.Entities;
+using ToDoListMVVM.Interface;
 
 namespace ToDoListMVVM.Services
 {

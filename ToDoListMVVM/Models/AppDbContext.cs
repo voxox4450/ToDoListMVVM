@@ -1,39 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDoListMVVM.Models;
+using ToDoListMVVM.Entities;
 
-namespace ToDoListMVVM.Entities
+namespace ToDoListMVVM.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        { }
-
         public DbSet<Note> Notes { get; set; }
-
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Priority> Priorities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Note>()
-                .HasKey(n => n.Id);
-
-            modelBuilder.Entity<Note>()
                 .Property(n => n.ContentText)
                 .IsRequired()
                 .HasMaxLength(150);
-
-            modelBuilder.Entity<Note>()
-                .Property(n => n.StartDate);
-
-            modelBuilder.Entity<Note>()
-                .Property(n => n.EndDate);
-
-            modelBuilder.Entity<Note>()
-                .Property(n => n.PriorityId);
-
-            modelBuilder.Entity<Note>()
-                .Property(n => n.StatusId);
 
             modelBuilder.Entity<Note>()
                 .HasOne(n => n.Priority)
@@ -44,6 +25,10 @@ namespace ToDoListMVVM.Entities
                 .HasOne(n => n.Status)
                 .WithMany(n => n.Notes)
                 .HasForeignKey(n => n.StatusId);
+
+            //modelBuilder.Entity<Note>()
+            //    .Property(x => x.CreatedOn)
+            //    .IsRequired();
 
             modelBuilder.Entity<Status>()
                 .Property(x => x.Id)

@@ -88,7 +88,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="60"
-            SelectedDate="{Binding StartDateEdit}" />
+            SelectedDate="{Binding StartDate}" />
         <DatePicker
             x:Name="end"
             Grid.Row="3"
@@ -96,7 +96,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="60"
-            SelectedDate="{Binding EndDateEdit}" />
+            SelectedDate="{Binding EndDate}" />
         <ComboBox
             x:Name="prio"
             Grid.Row="4"
@@ -106,8 +106,8 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
-            ItemsSource="{Binding EditPrio}"
-            SelectedValue="{Binding SelectedPrio}"
+            ItemsSource="{Binding Priorities}"
+            SelectedValue="{Binding SelectedPriorities}"
             SelectedValuePath="Id" />
         <ComboBox
             x:Name="status"
@@ -118,8 +118,8 @@
             VerticalAlignment="Center"
             DisplayMemberPath="Name"
             FontSize="60"
-            ItemsSource="{Binding EditStatus}"
-            SelectedValue="{Binding SelectedStatus}"
+            ItemsSource="{Binding Statuses}"
+            SelectedValue="{Binding SelectedStatuses}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button
@@ -127,7 +127,7 @@
             Grid.Column="2"
             Width="250"
             Height="50"
-            Command="{Binding ExitEditCommand}"
+            Command="{Binding EditCommand}"
             Content="Edytuj"
             FontSize="25"
             FontWeight="Bold" />

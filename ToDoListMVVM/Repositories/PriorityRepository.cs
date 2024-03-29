@@ -1,17 +1,15 @@
-﻿using ToDoListMVVM.Entities;
-using ToDoListMVVM.Interface;
+﻿using ToDoListMVVM.Interface;
 using ToDoListMVVM.Models;
 
 namespace ToDoListMVVM.Repositories
 {
     internal class PriorityRepository(AppDbContext appDbContext) : IPriorityRepository
     {
-        private readonly AppDbContext _noteRepository = appDbContext;
+        private readonly AppDbContext _appDbContext = appDbContext;
 
         public IEnumerable<Priority> GetAll()
         {
-            _noteRepository.ChangeTracker.LazyLoadingEnabled = false;
-            return [.. _noteRepository.Priorities];
+            return _appDbContext.Priorities;
         }
     }
 }

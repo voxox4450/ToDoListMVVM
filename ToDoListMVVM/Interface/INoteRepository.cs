@@ -1,4 +1,4 @@
-﻿using ToDoListMVVM.Models;
+﻿using ToDoListMVVM.Entities;
 
 namespace ToDoListMVVM.Interface
 {
@@ -11,7 +11,5 @@ namespace ToDoListMVVM.Interface
         void Delete(Note noteToRemove);
 
         IEnumerable<Note> GetAll();
-
-        Note Find(int id);
     }
 }

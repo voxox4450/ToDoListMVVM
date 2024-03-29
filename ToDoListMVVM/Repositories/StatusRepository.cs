@@ -6,12 +6,11 @@ namespace ToDoListMVVM.Repositories
 {
     internal class StatusRepository(AppDbContext appDbContext) : IStatusRepository
     {
-        private readonly AppDbContext _noteRepository = appDbContext;
+        private readonly AppDbContext _appDbContext = appDbContext;
 
         public IEnumerable<Status> GetAll()
         {
-            _noteRepository.ChangeTracker.LazyLoadingEnabled = false;
-            return [.. _noteRepository.Statuses];
+            return _appDbContext.Statuses;
         }
     }
 }
