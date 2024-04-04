@@ -4,20 +4,11 @@ using ToDoListMVVM.Entities;
 
 namespace ToDoListMVVM.Models
 {
-    public class SeederContext
+    public class SeederContext(AppDbContext dbContext)
     {
-        private readonly AppDbContext _dbContext;
+        private readonly AppDbContext _dbContext = dbContext;
 
-        public SeederContext()
-        {
-            using var scope = Ioc.Default.CreateScope();
-            _dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            _dbContext.Database.EnsureCreated();
-            GetPriorities();
-            GetStatuses();
-        }
-
-        private void GetPriorities()
+        public void SeedPriorities()
         {
             if (!_dbContext.Priorities.Any())
             {
@@ -33,7 +24,7 @@ namespace ToDoListMVVM.Models
             }
         }
 
-        private void GetStatuses()
+        public void SeedStatuses()
         {
             if (!_dbContext.Statuses.Any())
             {

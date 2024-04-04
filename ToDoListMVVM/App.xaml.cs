@@ -32,7 +32,7 @@ namespace ToDoListMVVM
                 .AddTransient<MainViewModel>()
                 .AddTransient<AddViewModel>()
                 .AddTransient<EditViewModel>()
-                .AddTransient<SeederContext>()
+                .AddScoped<SeederContext>()
                 .AddSingleton<IConfiguration>(Configuration)
                 .AddScoped<INoteService, NoteService>()
                 .AddScoped<INoteRepository, NoteRepository>()
@@ -42,6 +42,11 @@ namespace ToDoListMVVM
                 .AddScoped<IStatusRepository, StatusRepository>()
                 .AddScoped<IDialogService, DialogService>()
                 .BuildServiceProvider());
+
+            using var scope = Ioc.Default.CreateScope();
+            var seeder = scope.ServiceProvider.GetRequiredService<SeederContext>();
+            seeder.SeedStatuses();
+            seeder.SeedPriorities();
         }
     }
 }
