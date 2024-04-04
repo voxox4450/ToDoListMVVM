@@ -18,8 +18,8 @@ namespace ToDoListMVVM
         public App()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory());
-            //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
 
             Configuration = builder.Build();
         }
@@ -34,13 +34,12 @@ namespace ToDoListMVVM
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
                 .AddDbContext<AppDbContext>(options => options
-                    .UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;"))
-                //.AddDbContext<AppDbContext>(options.UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;")
-                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
+                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
                 .AddTransient<MainViewModel>()
                 .AddTransient<AddViewModel>()
                 .AddTransient<EditViewModel>()
                 .AddTransient<SeederContext>()
+                .AddSingleton<IConfiguration>(Configuration)
                 .AddScoped<INoteService, NoteService>()
                 .AddScoped<INoteRepository, NoteRepository>()
                 .AddScoped<IPriorityService, PriorityService>()
