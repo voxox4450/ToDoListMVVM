@@ -15,21 +15,15 @@ namespace ToDoListMVVM
 {
     public partial class App : Application
     {
-        public App()
+        public IConfiguration Configuration { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
 
             Configuration = builder.Build();
-        }
-
-        public IConfiguration Configuration { get; private set; }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            // TODO: przeniesc constring do pliku appsettings.json
-            // mozliwosc przesylania migracji przestanie dzialac -> zastanowic sie jak to naprawic
 
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
