@@ -54,7 +54,15 @@ namespace ToDoListMVVM.ViewModel
             }
             else
             {
-                _noteService.Edit(_noteToEdit, TextEdit!, StartDate, EndDate, SelectedPriorities, SelectedStatuses);
+                var newNote = new Note()
+                {
+                    ContentText = TextEdit,
+                    StartDate = StartDate,
+                    EndDate = EndDate,
+                    PriorityId = SelectedPriorities,
+                    StatusId = SelectedStatuses
+                };
+                _noteService.Edit(_noteToEdit, newNote);
                 _dialogService.CloseDialog();
             }
         }

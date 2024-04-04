@@ -18,7 +18,7 @@ namespace ToDoListMVVM.ViewModel
             _noteService = noteService;
 
             ExitCommand = new RelayCommand(ExitApplication);
-            AddNoteComand = new RelayCommand(NextPage);
+            AddNoteComand = new RelayCommand(Add);
             DeleteCommand = new RelayCommand(DeletePage);
             EditCommand = new RelayCommand(EditPage);
 
@@ -39,7 +39,7 @@ namespace ToDoListMVVM.ViewModel
             Application.Current.Shutdown();
         }
 
-        private void NextPage()
+        private void Add()
         {
             _dialogService.ShowAdd();
             Refresh();
