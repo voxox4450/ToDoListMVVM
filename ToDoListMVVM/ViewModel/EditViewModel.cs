@@ -64,6 +64,7 @@ namespace ToDoListMVVM.ViewModel
                 };
                 _noteService.Edit(_noteToEdit, newNote);
                 _dialogService.CloseDialog();
+                // po zamnieciu okna dialogowego chce przysłac informacje dla maina zeby odwiezył widok tylko tego elementu
             }
         }
     }

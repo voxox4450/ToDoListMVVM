@@ -50,9 +50,7 @@ namespace ToDoListMVVM.ViewModel
             if (SelectedItem != null)
             {
                 _noteService.Remove(SelectedItem);
-
-                //TODO: nie pobieraj wszystkiego z bazy danych lecz usuwaj z listy ten usuniety
-                Refresh();
+                CollectionList.Remove(SelectedItem);
             }
         }
 
