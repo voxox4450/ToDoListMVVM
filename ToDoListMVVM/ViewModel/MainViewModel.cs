@@ -23,7 +23,6 @@ namespace ToDoListMVVM.ViewModel
             EditCommand = new RelayCommand(EditPage);
 
             CollectionList = new ObservableCollection<Note>(_noteService.GetAll());
-            _noteService = noteService;
             _dialogService = dialogService;
         }
 
@@ -42,16 +41,21 @@ namespace ToDoListMVVM.ViewModel
         private void Add()
         {
             _dialogService.ShowAdd();
-            Refresh();
+            CollectionList.Clear();
+            foreach (var note in _noteService.GetAll())
+            {
+                CollectionList.Add(note);
+            }
         }
 
         private void DeletePage()
         {
-            if (SelectedItem != null)
+            if (SelectedItem is null)
             {
-                _noteService.Remove(SelectedItem);
-                CollectionList.Remove(SelectedItem);
+                return;
             }
+            _noteService.Remove(SelectedItem);
+            CollectionList.Remove(SelectedItem);
         }
 
         private void EditPage()
@@ -61,10 +65,16 @@ namespace ToDoListMVVM.ViewModel
                 return;
             }
 
+            int selectedIndex = CollectionList.IndexOf(SelectedItem);
+
             _dialogService.ShowEdit(SelectedItem);
 
-            //TODO: nie pobieraj wszystkiego z bazy danych lecz odswiezaj ten element na interfejsie
-            Refresh();
+            if (SelectedItem.CreatedOn)
+            {
+                Note OldNote = SelectedItem;
+                CollectionList.Remove(OldNote);
+                CollectionList.Insert(selectedIndex, OldNote);
+            }
         }
 
         private void Refresh()

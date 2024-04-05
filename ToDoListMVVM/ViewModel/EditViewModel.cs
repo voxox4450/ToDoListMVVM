@@ -14,6 +14,9 @@ namespace ToDoListMVVM.ViewModel
         private readonly IPriorityService _priorityService;
         private readonly IStatusService _statusService;
         private readonly IDialogService _dialogService;
+        private readonly Note _noteToEdit;
+
+        private readonly Action<object, Note> _noteEditedCallback;
 
         public EditViewModel(Note note)
         {
@@ -21,6 +24,7 @@ namespace ToDoListMVVM.ViewModel
             _priorityService = Ioc.Default.GetRequiredService<IPriorityService>();
             _statusService = Ioc.Default.GetRequiredService<IStatusService>();
             _dialogService = Ioc.Default.GetRequiredService<IDialogService>();
+
             _noteToEdit = note;
             TextEdit = _noteToEdit.ContentText;
             StartDate = _noteToEdit.StartDate;
@@ -32,7 +36,6 @@ namespace ToDoListMVVM.ViewModel
             Statuses = [.. _statusService.GetAll()];
 
             EditCommand = new RelayCommand(Edit);
-            _noteToEdit = note;
         }
 
         public List<Priority> Priorities { get; set; }
@@ -44,7 +47,6 @@ namespace ToDoListMVVM.ViewModel
         public DateTime EndDate { get; set; }
         public string? TextEdit { get; set; }
         public ICommand EditCommand { get; }
-        private readonly Note _noteToEdit;
 
         private void Edit()
         {
@@ -60,11 +62,11 @@ namespace ToDoListMVVM.ViewModel
                     StartDate = StartDate,
                     EndDate = EndDate,
                     PriorityId = SelectedPriorities,
-                    StatusId = SelectedStatuses
+                    StatusId = SelectedStatuses,
                 };
+                newNote.CreatedOn = true;
                 _noteService.Edit(_noteToEdit, newNote);
                 _dialogService.CloseDialog();
-                // po zamnieciu okna dialogowego chce przysłac informacje dla maina zeby odwiezył widok tylko tego elementu
             }
         }
     }

@@ -12,7 +12,10 @@ namespace ToDoListMVVM.ViewModel
         private readonly INoteService _noteService;
         private readonly IDialogService _dialogService;
 
-        public AddViewModel(INoteService noteService, IPriorityService priorityService, IStatusService statusService, IDialogService dialogService)
+        public AddViewModel(INoteService noteService,
+            IPriorityService priorityService,
+            IStatusService statusService,
+            IDialogService dialogService)
         {
             _noteService = noteService;
             _dialogService = dialogService;
