@@ -26,9 +26,6 @@ namespace ToDoListMVVM.Models
                 .WithMany(n => n.Notes)
                 .HasForeignKey(n => n.StatusId);
 
-            modelBuilder.Entity<Note>()
-                .Property(n => n.CreatedOn);
-
             modelBuilder.Entity<Status>()
                 .Property(x => x.Id)
                 .ValueGeneratedNever();

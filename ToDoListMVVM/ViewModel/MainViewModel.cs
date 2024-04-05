@@ -69,21 +69,9 @@ namespace ToDoListMVVM.ViewModel
 
             _dialogService.ShowEdit(SelectedItem);
 
-            if (SelectedItem.CreatedOn)
-            {
-                Note OldNote = SelectedItem;
-                CollectionList.Remove(OldNote);
-                CollectionList.Insert(selectedIndex, OldNote);
-            }
-        }
-
-        private void Refresh()
-        {
-            CollectionList.Clear();
-            foreach (var note in _noteService.GetAll())
-            {
-                CollectionList.Add(note);
-            }
+            Note OldNote = SelectedItem;
+            CollectionList.Remove(OldNote);
+            CollectionList.Insert(selectedIndex, OldNote);
         }
     }
 }

@@ -64,7 +64,6 @@ namespace ToDoListMVVM.ViewModel
                     PriorityId = SelectedPriorities,
                     StatusId = SelectedStatuses,
                 };
-                newNote.CreatedOn = true;
                 _noteService.Edit(_noteToEdit, newNote);
                 _dialogService.CloseDialog();
             }
