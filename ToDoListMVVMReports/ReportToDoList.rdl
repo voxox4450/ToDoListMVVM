@@ -91,20 +91,13 @@
     <DataSet Name="Complete">
       <Query>
         <DataSourceName>Database</DataSourceName>
-        <CommandText>SELECT 
-    n.Id AS NoteId,
-    n.ContentText,
-    n.EndDate,
-    n.StartDate,
-    p.Name AS PriorityName,
-    s.Name AS StatusName
-FROM 
-    Notes n
-JOIN 
-    Priorities p ON n.PriorityId = p.Id
-JOIN 
-    Statuses s ON n.StatusId = s.Id;
-</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@StatusId">
+            <Value>=Parameters!StatusId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>GetNotes</CommandText>
       </Query>
       <Fields>
         <Field Name="NoteId">
@@ -1502,10 +1495,44 @@ JOIN
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Status">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>0</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Status</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Statuses</DataSetName>
+          <ValueField>Id</ValueField>
+          <LabelField>Name</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="StatusId">
+      <DataType>Integer</DataType>
+      <Prompt>Status Id</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Status</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>StatusId</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
