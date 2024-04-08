@@ -104,14 +104,11 @@ namespace ToDoListMVVM.ViewModel
         }
 
         public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
-
         {
             if (context.ObjectInstance is EditViewModel editViewModel && editViewModel.StartDate > endDate)
-
             {
                 return new ValidationResult("Data zakończenia musi być większa niż rozpoczęcia");
             }
-
             return ValidationResult.Success!;
         }
 
