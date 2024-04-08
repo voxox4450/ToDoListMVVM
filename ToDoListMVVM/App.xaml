@@ -4,5 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ToDoListMVVM"
     StartupUri="Views/MainWindow.xaml">
-    <Application.Resources />
+    <Application.Resources>
+
+    <!-- Validation.ErrorTemplate -->
+    <ControlTemplate x:Key="ValidationErrorTemplate">
+        <StackPanel>
+            <Border BorderBrush="Red" BorderThickness="1">
+                <AdornedElementPlaceholder x:Name="textBox" />
+            </Border>
+            <TextBlock Foreground="Red" Text="{Binding ElementName=textBox, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+        </StackPanel>
+    </ControlTemplate>
+    </Application.Resources>
 </Application>

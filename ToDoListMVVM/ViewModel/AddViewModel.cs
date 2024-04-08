@@ -44,28 +44,44 @@ namespace ToDoListMVVM.ViewModel
         public int SelectedPriorities
         {
             get => _selectedPriorities;
-            set => SetProperty(ref _selectedPriorities, value);
+            set
+            {
+                SetProperty(ref _selectedPriorities, value);
+                ValidateProperty(_selectedPriorities);
+            }
         }
 
         public int SelectedStatuses
         {
             get => _selectedStatuses;
-            set => SetProperty(ref _selectedStatuses, value);
+            set
+            {
+                SetProperty(ref _selectedStatuses, value);
+                ValidateProperty(_selectedStatuses);
+            }
         }
 
         [Required(ErrorMessage = "Proszę podać datę rozpoczęcia.")]
         public DateTime StartDate
         {
             get => _startDate;
-            set => SetProperty(ref _startDate, value);
+            set
+            {
+                SetProperty(ref _startDate, value);
+                ValidateProperty(_startDate);
+            }
         }
 
         [Required(ErrorMessage = "Proszę podać datę zakończenia.")]
-        [CustomValidation(typeof(EditViewModel), nameof(ValidateEndDate))]
+        [CustomValidation(typeof(AddViewModel), nameof(ValidateEndDate))]
         public DateTime EndDate
         {
             get => _endDate;
-            set => SetProperty(ref _endDate, value);
+            set
+            {
+                SetProperty(ref _endDate, value);
+                ValidateProperty(_endDate);
+            }
         }
 
         [Required(ErrorMessage = "Pole tekstowe jest wymagane.")]
@@ -73,7 +89,11 @@ namespace ToDoListMVVM.ViewModel
         public string TextNote
         {
             get => _textNote;
-            set => SetProperty(ref _textNote, value);
+            set
+            {
+                SetProperty(ref _textNote, value);
+                ValidateProperty(_textNote);
+            }
         }
 
         private bool IsValid()
@@ -87,10 +107,10 @@ namespace ToDoListMVVM.ViewModel
         public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
 
         {
-            if (context.ObjectInstance is EditViewModel editViewModel && editViewModel.StartDate > endDate)
+            if (context.ObjectInstance is AddViewModel addViewModel && addViewModel.StartDate > endDate)
 
             {
-                return new ValidationResult("Wprowadzono błędny zakres dat!");
+                return new ValidationResult("Data zakończenia musi być większa niż rozpoczęcia");
             }
 
             return ValidationResult.Success!;
