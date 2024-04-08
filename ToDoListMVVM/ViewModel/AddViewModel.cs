@@ -96,14 +96,6 @@ namespace ToDoListMVVM.ViewModel
             }
         }
 
-        private bool IsValid()
-
-        {
-            ValidateAllProperties();
-
-            return !HasErrors;
-        }
-
         public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
 
         {

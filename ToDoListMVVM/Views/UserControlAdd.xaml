@@ -87,7 +87,6 @@
             Status:
         </Label>
         <TextBox
-            x:Name="content"
             Grid.Row="1"
             Grid.Column="1"
             Width="600"
@@ -97,20 +96,19 @@
             FontSize="15"
             Text="{Binding TextNote, UpdateSourceTrigger=PropertyChanged}" />
         <DatePicker
-            x:Name="start"
             Grid.Row="2"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             FontSize="50"
-            SelectedDate="{Binding StartDate}" />
+            SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" />
         <DatePicker
             Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             FontSize="50"
-            SelectedDate="{Binding EndDate}" />
+            SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" />
 
         <ComboBox
             Grid.Row="4"
@@ -121,7 +119,7 @@
             DisplayMemberPath="Name"
             FontSize="50"
             ItemsSource="{Binding Priorities}"
-            SelectedValue="{Binding SelectedPriorities}"
+            SelectedValue="{Binding SelectedPriorities, UpdateSourceTrigger=PropertyChanged}"
             SelectedValuePath="Id" />
         <ComboBox
             Grid.Row="5"
@@ -132,7 +130,7 @@
             DisplayMemberPath="Name"
             FontSize="50"
             ItemsSource="{Binding Statuses}"
-            SelectedValue="{Binding SelectedStatuses}"
+            SelectedValue="{Binding SelectedStatuses, UpdateSourceTrigger=PropertyChanged}"
             SelectedValuePath="Id"
             Visibility="Visible" />
         <Button

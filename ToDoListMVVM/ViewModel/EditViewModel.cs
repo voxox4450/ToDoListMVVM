@@ -1,5 +1,7 @@
-﻿using CommunityToolkit.Mvvm.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Input;
 using ToDoListMVVM.Entities;
@@ -8,15 +10,13 @@ using ToDoListMVVM.Models;
 
 namespace ToDoListMVVM.ViewModel
 {
-    public class EditViewModel
+    public class EditViewModel : ObservableValidator
     {
         private readonly INoteService _noteService;
         private readonly IPriorityService _priorityService;
         private readonly IStatusService _statusService;
         private readonly IDialogService _dialogService;
         private readonly Note _noteToEdit;
-
-        private readonly Action<object, Note> _noteEditedCallback;
 
         public EditViewModel(Note note)
         {
@@ -26,7 +26,7 @@ namespace ToDoListMVVM.ViewModel
             _dialogService = Ioc.Default.GetRequiredService<IDialogService>();
 
             _noteToEdit = note;
-            TextEdit = _noteToEdit.ContentText;
+            TextNote = _noteToEdit.ContentText;
             StartDate = _noteToEdit.StartDate;
             EndDate = _noteToEdit.EndDate;
             SelectedPriorities = _noteToEdit.PriorityId;
@@ -38,35 +38,100 @@ namespace ToDoListMVVM.ViewModel
             EditCommand = new RelayCommand(Edit);
         }
 
+        public ICommand EditCommand { get; }
         public List<Priority> Priorities { get; set; }
         public List<Status> Statuses { get; set; }
-        public int SelectedPriorities { get; set; }
-        public int SelectedStatuses { get; set; }
+        private int _selectedPriorities;
+        private int _selectedStatuses;
 
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string? TextEdit { get; set; }
-        public ICommand EditCommand { get; }
+        public DateTime _startDate;
+        private DateTime _endDate;
+        private string _textNote;
+
+        [Required(ErrorMessage = "Pole tekstowe jest wymagane.")]
+        [MaxLength(150, ErrorMessage = "Pole tekstowe nie może zawierać więcej niż 150 znaków.")]
+        public string TextNote
+        {
+            get => _textNote;
+            set
+            {
+                SetProperty(ref _textNote, value);
+                ValidateProperty(_textNote);
+            }
+        }
+
+        public int SelectedPriorities
+        {
+            get => _selectedPriorities;
+            set
+            {
+                SetProperty(ref _selectedPriorities, value);
+                ValidateProperty(_selectedPriorities);
+            }
+        }
+
+        public int SelectedStatuses
+        {
+            get => _selectedStatuses;
+            set
+            {
+                SetProperty(ref _selectedStatuses, value);
+                ValidateProperty(_selectedStatuses);
+            }
+        }
+
+        [Required(ErrorMessage = "Proszę podać datę rozpoczęcia.")]
+        public DateTime StartDate
+        {
+            get => _startDate;
+            set
+            {
+                SetProperty(ref _startDate, value);
+                ValidateProperty(_startDate);
+            }
+        }
+
+        [Required(ErrorMessage = "Proszę podać datę zakończenia.")]
+        [CustomValidation(typeof(EditViewModel), nameof(ValidateEndDate))]
+        public DateTime EndDate
+        {
+            get => _endDate;
+            set
+            {
+                SetProperty(ref _endDate, value);
+                ValidateProperty(_endDate);
+            }
+        }
+
+        public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
+
+        {
+            if (context.ObjectInstance is EditViewModel editViewModel && editViewModel.StartDate > endDate)
+
+            {
+                return new ValidationResult("Data zakończenia musi być większa niż rozpoczęcia");
+            }
+
+            return ValidationResult.Success!;
+        }
 
         private void Edit()
         {
-            if (StartDate > EndDate)
+            if (HasErrors)
+
             {
-                MessageBox.Show("Błąd: Data rozpoczęcia musi być mniejsza niż data zakończenia.");
+                return;
             }
-            else
+            var newNote = new Note()
             {
-                var newNote = new Note()
-                {
-                    ContentText = TextEdit,
-                    StartDate = StartDate,
-                    EndDate = EndDate,
-                    PriorityId = SelectedPriorities,
-                    StatusId = SelectedStatuses,
-                };
-                _noteService.Edit(_noteToEdit, newNote);
-                _dialogService.CloseDialog();
-            }
+                ContentText = TextNote,
+                StartDate = StartDate,
+                EndDate = EndDate,
+                PriorityId = SelectedPriorities,
+                StatusId = SelectedStatuses,
+            };
+            _noteService.Edit(_noteToEdit, newNote);
+            _dialogService.CloseDialog();
         }
     }
 }
