@@ -20,6 +20,8 @@ namespace ToDoListMVVM.ViewModel
             _noteService = noteService;
             _dialogService = dialogService;
             _noteService.NoteAdded += OnNoteAdded;
+            _noteService.NoteDeleted += OnNoteDeleted;
+            _noteService.NoteEdited += OnNoteEdited;
 
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(Add);
@@ -58,7 +60,11 @@ namespace ToDoListMVVM.ViewModel
                 return;
             }
             _noteService.Remove(SelectedItem);
-            CollectionList.Remove(SelectedItem);
+        }
+
+        private void OnNoteDeleted(object? sender, Note note)
+        {
+            CollectionList.Remove(note);
         }
 
         private void EditPage()
@@ -68,13 +74,15 @@ namespace ToDoListMVVM.ViewModel
                 return;
             }
 
-            int selectedIndex = CollectionList.IndexOf(SelectedItem);
-
             _dialogService.ShowEdit(SelectedItem);
+        }
 
-            Note OldNote = SelectedItem;
-            CollectionList.Remove(OldNote);
-            CollectionList.Insert(selectedIndex, OldNote);
+        private void OnNoteEdited(object? sender, Note note)
+        {
+            int selectedIndex = CollectionList.IndexOf(SelectedItem);
+            Note oldNote = note;
+            CollectionList.Remove(oldNote);
+            CollectionList.Insert(selectedIndex, oldNote);
         }
     }
 }

@@ -7,6 +7,12 @@ namespace ToDoListMVVM.Services
     {
         private readonly INoteRepository _noteRepository = noteRepository;
 
+        public event EventHandler<Note>? NoteAdded;
+
+        public event EventHandler<Note>? NoteDeleted;
+
+        public event EventHandler<Note>? NoteEdited;
+
         public void Add(Note note)
         {
             _noteRepository.Add(note);
@@ -23,19 +29,29 @@ namespace ToDoListMVVM.Services
             return _noteRepository.Get(noteId);
         }
 
-        public void Edit(Note existingNote, Note newNote)
+        public void Edit(Note existingNote, Note note)
         {
-            existingNote.ContentText = newNote.ContentText;
-            existingNote.StartDate = newNote.StartDate;
-            existingNote.EndDate = newNote.EndDate;
-            existingNote.PriorityId = newNote.PriorityId;
-            existingNote.StatusId = newNote.StatusId;
+            existingNote.ContentText = note.ContentText;
+            existingNote.StartDate = note.StartDate;
+            existingNote.EndDate = note.EndDate;
+            existingNote.PriorityId = note.PriorityId;
+            existingNote.StatusId = note.StatusId;
 
             _noteRepository.Update(existingNote);
+            var newNote = Get(note.Id);
+            if (newNote != null)
+            {
+                NoteAdded?.Invoke(this, newNote);
+            }
         }
 
         public void Remove(Note note)
         {
+            var newNote = Get(note.Id);
+            if (newNote != null)
+            {
+                NoteDeleted?.Invoke(this, newNote);
+            }
             _noteRepository.Delete(note);
         }
 
@@ -43,7 +59,5 @@ namespace ToDoListMVVM.Services
         {
             return _noteRepository.GetAll();
         }
-
-        public event EventHandler<Note>? NoteAdded;
     }
 }

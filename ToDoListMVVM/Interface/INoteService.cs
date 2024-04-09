@@ -10,10 +10,14 @@ namespace ToDoListMVVM.Interface
 
         void Add(Note note);
 
-        void Edit(Note existingNote, Note newNote);
+        void Edit(Note existingNote, Note note);
 
         Note? Get(int noteId);
 
         event EventHandler<Note> NoteAdded;
+
+        event EventHandler<Note> NoteDeleted;
+
+        event EventHandler<Note> NoteEdited;
     }
 }
