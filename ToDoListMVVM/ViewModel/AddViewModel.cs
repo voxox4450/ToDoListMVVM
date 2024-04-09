@@ -6,6 +6,7 @@ using ToDoListMVVM.Interface;
 using ToDoListMVVM.Entities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ToDoListMVVM.Validation;
 
 namespace ToDoListMVVM.ViewModel
 {
@@ -73,7 +74,7 @@ namespace ToDoListMVVM.ViewModel
         }
 
         [Required(ErrorMessage = "Proszę podać datę zakończenia.")]
-        [CustomValidation(typeof(AddViewModel), nameof(ValidateEndDate))]
+        [CustomValidation(typeof(ValidationForm), nameof(ValidationForm.ValidateEndDate))]
         public DateTime EndDate
         {
             get => _endDate;
@@ -96,17 +97,17 @@ namespace ToDoListMVVM.ViewModel
             }
         }
 
-        public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
+        //public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
 
-        {
-            if (context.ObjectInstance is AddViewModel addViewModel && addViewModel.StartDate > endDate)
+        //{
+        //    if (context.ObjectInstance is AddViewModel addViewModel && addViewModel.StartDate > endDate)
 
-            {
-                return new ValidationResult("Data zakończenia musi być większa niż rozpoczęcia");
-            }
+        //    {
+        //        return new ValidationResult("Data zakończenia musi być większa niż rozpoczęcia");
+        //    }
 
-            return ValidationResult.Success!;
-        }
+        //    return ValidationResult.Success!;
+        //}
 
         private void Add()
         {

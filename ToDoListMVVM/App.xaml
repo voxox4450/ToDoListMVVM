@@ -5,8 +5,6 @@
     xmlns:local="clr-namespace:ToDoListMVVM"
     StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-
-    <!-- Validation.ErrorTemplate -->
     <ControlTemplate x:Key="ValidationErrorTemplate">
         <StackPanel>
             <Border BorderBrush="Red" BorderThickness="1">
