@@ -38,10 +38,10 @@ namespace ToDoListMVVM.Services
             existingNote.StatusId = note.StatusId;
 
             _noteRepository.Update(existingNote);
-            var newNote = Get(note.Id);
+            var newNote = Get(existingNote.Id);
             if (newNote != null)
             {
-                NoteAdded?.Invoke(this, newNote);
+                NoteEdited?.Invoke(this, newNote);
             }
         }
 

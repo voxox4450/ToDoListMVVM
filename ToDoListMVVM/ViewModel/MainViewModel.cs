@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -37,6 +38,8 @@ namespace ToDoListMVVM.ViewModel
         public ICommand EditCommand { get; }
         public Note? SelectedItem { get; set; }
         public ObservableCollection<Note> CollectionList { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void ExitApplication()
         {
@@ -79,10 +82,16 @@ namespace ToDoListMVVM.ViewModel
 
         private void OnNoteEdited(object? sender, Note note)
         {
-            int selectedIndex = CollectionList.IndexOf(SelectedItem);
-            Note oldNote = note;
-            CollectionList.Remove(oldNote);
-            CollectionList.Insert(selectedIndex, oldNote);
+            var newNote = CollectionList.First(n => n.Id == note.Id);
+            CollectionList[newNote.Id] = note;
+            //newNote.ContentText = note.ContentText;
+            //newNote.StartDate = note.StartDate;
+            //newNote.EndDate = note.EndDate;
+            //newNote.PriorityId = note.PriorityId;
+            //newNote.StatusId = note.StatusId;
+            //newNote.Priority = note.Priority;
+            //newNote.Status = note.Status;
+            //newNote.Id = note.Id;
         }
     }
 }
