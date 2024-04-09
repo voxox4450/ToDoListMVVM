@@ -1,19 +1,26 @@
-﻿using System.Windows;
-using ToDoListMVVM.Entities;
+﻿using ToDoListMVVM.Entities;
 using ToDoListMVVM.Interface;
-using ToDoListMVVM.Views;
 
 namespace ToDoListMVVM.Services
 {
     public class NoteService(INoteRepository noteRepository) : INoteService
-
     {
         private readonly INoteRepository _noteRepository = noteRepository;
 
-        public void Add(Note newNote)
+        public void Add(Note note)
         {
-            _noteRepository.Add(newNote);
-            OnAddNoteRequested(EventArgs.Empty);
+            _noteRepository.Add(note);
+
+            var newNote = Get(note.Id);
+            if (newNote != null)
+            {
+                NoteAdded?.Invoke(this, newNote);
+            }
+        }
+
+        public Note? Get(int noteId)
+        {
+            return _noteRepository.Get(noteId);
         }
 
         public void Edit(Note existingNote, Note newNote)
@@ -37,11 +44,6 @@ namespace ToDoListMVVM.Services
             return _noteRepository.GetAll();
         }
 
-        public event EventHandler AddNoteRequested;
-
-        public virtual void OnAddNoteRequested(EventArgs e)
-        {
-            AddNoteRequested?.Invoke(this, e);
-        }
+        public event EventHandler<Note>? NoteAdded;
     }
 }

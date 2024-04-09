@@ -11,5 +11,6 @@ namespace ToDoListMVVM.Interface
         void Delete(Note noteToRemove);
 
         IEnumerable<Note> GetAll();
+        Note? Get(int noteId);
     }
 }

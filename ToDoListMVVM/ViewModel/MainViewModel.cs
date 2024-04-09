@@ -14,13 +14,12 @@ namespace ToDoListMVVM.ViewModel
     {
         private readonly INoteService _noteService;
         private readonly IDialogService _dialogService;
-        private readonly AddViewModel _addViewModel;
 
         public MainViewModel(INoteService noteService, IDialogService dialogService)
         {
             _noteService = noteService;
             _dialogService = dialogService;
-            _noteService.AddNoteRequested += OnAddNoteRequested;
+            _noteService.NoteAdded += OnNoteAdded;
 
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(Add);
@@ -47,13 +46,9 @@ namespace ToDoListMVVM.ViewModel
             _dialogService.ShowAdd();
         }
 
-        private void OnAddNoteRequested(object sender, EventArgs e)
+        private void OnNoteAdded(object? sender, Note note)
         {
-            CollectionList.Clear();
-            foreach (var note in _noteService.GetAll())
-            {
-                CollectionList.Add(note);
-            }
+            CollectionList.Add(note);
         }
 
         private void DeletePage()

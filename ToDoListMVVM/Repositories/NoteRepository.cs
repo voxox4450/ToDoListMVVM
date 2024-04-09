@@ -33,5 +33,13 @@ namespace ToDoListMVVM.Repositories
                 .Include(x => x.Priority)
                 .Include(x => x.Status);
         }
+
+        public Note? Get(int noteId)
+        {
+            return _appDbContext.Notes
+                .Include(x => x.Priority)
+                .Include(x => x.Status)
+                .FirstOrDefault(x => x.Id == noteId);
+        }
     }
 }

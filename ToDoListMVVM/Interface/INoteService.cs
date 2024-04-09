@@ -8,12 +8,12 @@ namespace ToDoListMVVM.Interface
 
         IEnumerable<Note> GetAll();
 
-        void Add(Note newNote);
+        void Add(Note note);
 
         void Edit(Note existingNote, Note newNote);
 
-        void OnAddNoteRequested(EventArgs e);
+        Note? Get(int noteId);
 
-        event EventHandler AddNoteRequested;
+        event EventHandler<Note> NoteAdded;
     }
 }
