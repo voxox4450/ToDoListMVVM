@@ -27,7 +27,7 @@ namespace ToDoListMVVM.ViewModel
             _dialogService = Ioc.Default.GetRequiredService<IDialogService>();
 
             _noteToEdit = note;
-            TextNote = _noteToEdit.ContentText;
+            TextNote = _noteToEdit.ContentText!;
             StartDate = _noteToEdit.StartDate;
             EndDate = _noteToEdit.EndDate;
             SelectedPriorities = _noteToEdit.PriorityId;
@@ -45,7 +45,7 @@ namespace ToDoListMVVM.ViewModel
         private int _selectedPriorities;
         private int _selectedStatuses;
 
-        public DateTime _startDate;
+        private DateTime _startDate;
         private DateTime _endDate;
         private string _textNote;
 

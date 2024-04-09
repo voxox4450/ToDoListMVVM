@@ -1,12 +1,13 @@
-﻿using System.Windows;
-using ToDoListMVVM.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using ToDoListMVVM.Interface;
 using ToDoListMVVM.Entities;
+using ToDoListMVVM.Interface;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using ToDoListMVVM.Validation;
+using ToDoListMVVM.Models;
 
 namespace ToDoListMVVM.ViewModel
 {
@@ -25,8 +26,8 @@ namespace ToDoListMVVM.ViewModel
             TextNote = string.Empty;
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
-            Priorities = [.. priorityService.GetAll()];
-            Statuses = [.. statusService.GetAll()];
+            Priorities = new List<Priority>(priorityService.GetAll());
+            Statuses = new List<Status>(statusService.GetAll());
 
             AddCommand = new RelayCommand(Add);
         }
@@ -97,25 +98,13 @@ namespace ToDoListMVVM.ViewModel
             }
         }
 
-        //public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
-
-        //{
-        //    if (context.ObjectInstance is AddViewModel addViewModel && addViewModel.StartDate > endDate)
-
-        //    {
-        //        return new ValidationResult("Data zakończenia musi być większa niż rozpoczęcia");
-        //    }
-
-        //    return ValidationResult.Success!;
-        //}
-
         private void Add()
         {
             if (HasErrors)
-
             {
                 return;
             }
+
             var newNote = new Note()
             {
                 ContentText = TextNote,
@@ -124,6 +113,7 @@ namespace ToDoListMVVM.ViewModel
                 PriorityId = SelectedPriorities,
                 StatusId = SelectedStatuses
             };
+
             _noteService.Add(newNote);
             _dialogService.CloseDialog();
         }

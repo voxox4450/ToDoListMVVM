@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,10 +14,13 @@ namespace ToDoListMVVM.ViewModel
     {
         private readonly INoteService _noteService;
         private readonly IDialogService _dialogService;
+        private readonly AddViewModel _addViewModel;
 
         public MainViewModel(INoteService noteService, IDialogService dialogService)
         {
             _noteService = noteService;
+            _dialogService = dialogService;
+            _noteService.AddNoteRequested += OnAddNoteRequested;
 
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(Add);
@@ -23,7 +28,6 @@ namespace ToDoListMVVM.ViewModel
             EditCommand = new RelayCommand(EditPage);
 
             CollectionList = new ObservableCollection<Note>(_noteService.GetAll());
-            _dialogService = dialogService;
         }
 
         public ICommand ExitCommand { get; }
@@ -41,6 +45,10 @@ namespace ToDoListMVVM.ViewModel
         private void Add()
         {
             _dialogService.ShowAdd();
+        }
+
+        private void OnAddNoteRequested(object sender, EventArgs e)
+        {
             CollectionList.Clear();
             foreach (var note in _noteService.GetAll())
             {

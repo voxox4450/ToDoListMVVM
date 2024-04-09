@@ -13,6 +13,7 @@ namespace ToDoListMVVM.Services
         public void Add(Note newNote)
         {
             _noteRepository.Add(newNote);
+            OnAddNoteRequested(EventArgs.Empty);
         }
 
         public void Edit(Note existingNote, Note newNote)
@@ -34,6 +35,13 @@ namespace ToDoListMVVM.Services
         public IEnumerable<Note> GetAll()
         {
             return _noteRepository.GetAll();
+        }
+
+        public event EventHandler AddNoteRequested;
+
+        public virtual void OnAddNoteRequested(EventArgs e)
+        {
+            AddNoteRequested?.Invoke(this, e);
         }
     }
 }

@@ -11,5 +11,9 @@ namespace ToDoListMVVM.Interface
         void Add(Note newNote);
 
         void Edit(Note existingNote, Note newNote);
+
+        void OnAddNoteRequested(EventArgs e);
+
+        event EventHandler AddNoteRequested;
     }
 }
