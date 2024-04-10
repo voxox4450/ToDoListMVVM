@@ -16,7 +16,7 @@ namespace ToDoListMVVM.Views
             DataContext = Ioc.Default.GetRequiredService<MainViewModel>();
             if (DataContext is INotifyPropertyChanged viewModel)
             {
-                viewModel.PropertyChanged += PropertyChanged;
+                viewModel.PropertyChanged += (f, f2) => PropertyChanged(f!, f2);
             }
         }
 

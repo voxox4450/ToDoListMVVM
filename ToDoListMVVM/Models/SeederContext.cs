@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
-using ToDoListMVVM.Entities;
+﻿using ToDoListMVVM.Entities;
 
 namespace ToDoListMVVM.Models
 {
@@ -12,14 +10,14 @@ namespace ToDoListMVVM.Models
         {
             if (!_dbContext.Priorities.Any())
             {
-                var priorytety = new List<Priority>()
+                var priority = new List<Priority>()
                 {
                     new Priority { Id = 0, Name = "Wysoki" },
                     new Priority { Id = 1, Name = "Średni" },
                     new Priority { Id = 2, Name = "Niski" }
                 };
 
-                _dbContext.AddRange(priorytety);
+                _dbContext.AddRange(priority);
                 _dbContext.SaveChanges();
             }
         }
@@ -28,14 +26,14 @@ namespace ToDoListMVVM.Models
         {
             if (!_dbContext.Statuses.Any())
             {
-                var statusy = new List<Status>()
+                var statuses = new List<Status>()
                 {
                     new Status { Id = 0, Name = "Ukończono" },
                     new Status { Id = 1, Name = "Rozpoczęto" },
                     new Status { Id = 2, Name = "Dodano" }
                 };
 
-                _dbContext.AddRange(statusy);
+                _dbContext.AddRange(statuses);
                 _dbContext.SaveChanges();
             }
         }

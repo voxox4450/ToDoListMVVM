@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using ToDoListMVVM.Entities;
 using ToDoListMVVM.Interface;
@@ -33,33 +31,23 @@ namespace ToDoListMVVM.ViewModel
         }
 
         public ICommand AddCommand { get; }
-
         public List<Priority> Priorities { get; set; }
-
         public List<Status> Statuses { get; set; }
-        private int _selectedPriorities;
-        private int _selectedStatuses;
+        private string? _textNote;
         private DateTime _startDate = DateTime.Today;
         private DateTime _endDate = DateTime.Today;
-        private string _textNote;
+        private int _selectedPriorities;
+        private int _selectedStatuses;
 
-        public int SelectedPriorities
+        [Required(ErrorMessage = "Pole tekstowe jest wymagane.")]
+        [MaxLength(150, ErrorMessage = "Pole tekstowe nie może zawierać więcej niż 150 znaków.")]
+        public string TextNote
         {
-            get => _selectedPriorities;
+            get => _textNote!;
             set
             {
-                SetProperty(ref _selectedPriorities, value);
-                ValidateProperty(_selectedPriorities);
-            }
-        }
-
-        public int SelectedStatuses
-        {
-            get => _selectedStatuses;
-            set
-            {
-                SetProperty(ref _selectedStatuses, value);
-                ValidateProperty(_selectedStatuses);
+                SetProperty(ref _textNote, value);
+                ValidateProperty(_textNote);
             }
         }
 
@@ -86,15 +74,23 @@ namespace ToDoListMVVM.ViewModel
             }
         }
 
-        [Required(ErrorMessage = "Pole tekstowe jest wymagane.")]
-        [MaxLength(150, ErrorMessage = "Pole tekstowe nie może zawierać więcej niż 150 znaków.")]
-        public string TextNote
+        public int SelectedPriorities
         {
-            get => _textNote;
+            get => _selectedPriorities;
             set
             {
-                SetProperty(ref _textNote, value);
-                ValidateProperty(_textNote);
+                SetProperty(ref _selectedPriorities, value);
+                ValidateProperty(_selectedPriorities);
+            }
+        }
+
+        public int SelectedStatuses
+        {
+            get => _selectedStatuses;
+            set
+            {
+                SetProperty(ref _selectedStatuses, value);
+                ValidateProperty(_selectedStatuses);
             }
         }
 

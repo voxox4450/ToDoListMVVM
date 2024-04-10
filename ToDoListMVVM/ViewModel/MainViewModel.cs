@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -40,7 +38,7 @@ namespace ToDoListMVVM.ViewModel
 
         public ObservableCollection<Note> CollectionList { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<PropertyChangedEventArgs> PropertyChanged;
 
         private void ExitApplication()
         {
@@ -83,7 +81,7 @@ namespace ToDoListMVVM.ViewModel
 
         private void OnNoteEdited(object? sender, Note note)
         {
-            var index = CollectionList.IndexOf(CollectionList.FirstOrDefault(n => n.Id == note.Id));
+            int index = CollectionList.IndexOf(CollectionList.FirstOrDefault(n => n.Id == note.Id));
             CollectionList[index].ContentText = note.ContentText;
             CollectionList[index].StartDate = note.StartDate;
             CollectionList[index].EndDate = note.EndDate;

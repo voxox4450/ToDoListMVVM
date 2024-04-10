@@ -8,7 +8,9 @@ namespace ToDoListMVVM.Models
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer("Server=ACARS-0099;User=sa;Password=praktyki;Database=myDb;Trust Server Certificate=True;");
+            optionsBuilder.UseSqlServer("Server=ACARS-0099;User=sa;" +
+                                        "Password=praktyki;Database=myDb;" +
+                                        "Trust Server Certificate=True;");
             return new AppDbContext(optionsBuilder.Options);
         }
     }

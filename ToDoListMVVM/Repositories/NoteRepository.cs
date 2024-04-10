@@ -9,21 +9,21 @@ namespace ToDoListMVVM.Repositories
     {
         private readonly AppDbContext _appDbContext = appDbContext;
 
-        public void Add(Note noteToAdd)
+        public void Add(Note note)
         {
-            _appDbContext.Add(noteToAdd);
+            _appDbContext.Add(note);
             _appDbContext.SaveChanges();
         }
 
-        public void Delete(Note noteToRemove)
+        public void Delete(Note note)
         {
-            _appDbContext.Remove(noteToRemove);
+            _appDbContext.Remove(note);
             _appDbContext.SaveChanges();
         }
 
-        public void Update(Note noteToUpdate)
+        public void Update(Note note)
         {
-            _appDbContext.Update(noteToUpdate);
+            _appDbContext.Update(note);
             _appDbContext.SaveChanges();
         }
 

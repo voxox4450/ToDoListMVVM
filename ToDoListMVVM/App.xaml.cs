@@ -9,13 +9,12 @@ using ToDoListMVVM.Interface;
 using ToDoListMVVM.Services;
 using Microsoft.EntityFrameworkCore;
 using ToDoListMVVM.Repositories;
-using ToDoListMVVM.Entities;
 
 namespace ToDoListMVVM
 {
     public partial class App : Application
     {
-        public IConfiguration Configuration { get; private set; }
+        public IConfiguration? Configuration { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {

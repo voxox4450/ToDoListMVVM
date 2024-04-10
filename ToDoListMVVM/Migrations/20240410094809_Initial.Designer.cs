@@ -12,8 +12,8 @@ using ToDoListMVVM.Models;
 namespace ToDoListMVVM.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240404110434_createdon")]
-    partial class createdon
+    [Migration("20240410094809_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,9 +37,6 @@ namespace ToDoListMVVM.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("CreatedOn")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");

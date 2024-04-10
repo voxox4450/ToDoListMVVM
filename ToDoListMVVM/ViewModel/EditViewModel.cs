@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel.DataAnnotations;
-using System.Windows;
 using System.Windows.Input;
 using ToDoListMVVM.Entities;
 using ToDoListMVVM.Interface;
@@ -42,18 +41,17 @@ namespace ToDoListMVVM.ViewModel
         public ICommand EditCommand { get; }
         public List<Priority> Priorities { get; set; }
         public List<Status> Statuses { get; set; }
-        private int _selectedPriorities;
-        private int _selectedStatuses;
-
         private DateTime _startDate;
         private DateTime _endDate;
-        private string _textNote;
+        private string? _textNote;
+        private int _selectedPriorities;
+        private int _selectedStatuses;
 
         [Required(ErrorMessage = "Pole tekstowe jest wymagane.")]
         [MaxLength(150, ErrorMessage = "Pole tekstowe nie może zawierać więcej niż 150 znaków.")]
         public string TextNote
         {
-            get => _textNote;
+            get => _textNote!;
             set
             {
                 SetProperty(ref _textNote, value);

@@ -24,11 +24,6 @@ namespace ToDoListMVVM.Services
             }
         }
 
-        public Note? Get(int noteId)
-        {
-            return _noteRepository.Get(noteId);
-        }
-
         public void Edit(Note existingNote, Note note)
         {
             existingNote.ContentText = note.ContentText;
@@ -58,6 +53,11 @@ namespace ToDoListMVVM.Services
         public IEnumerable<Note> GetAll()
         {
             return _noteRepository.GetAll();
+        }
+
+        public Note? Get(int noteId)
+        {
+            return _noteRepository.Get(noteId);
         }
     }
 }

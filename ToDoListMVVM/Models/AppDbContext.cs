@@ -11,6 +11,7 @@ namespace ToDoListMVVM.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Note
             modelBuilder.Entity<Note>()
                 .Property(n => n.ContentText)
                 .IsRequired()
@@ -25,7 +26,7 @@ namespace ToDoListMVVM.Models
                 .HasOne(n => n.Status)
                 .WithMany(n => n.Notes)
                 .HasForeignKey(n => n.StatusId);
-
+            //Status
             modelBuilder.Entity<Status>()
                 .Property(x => x.Id)
                 .ValueGeneratedNever();
@@ -33,7 +34,7 @@ namespace ToDoListMVVM.Models
             modelBuilder.Entity<Status>()
                 .Property(x => x.Name)
                 .HasMaxLength(30);
-
+            //Priority
             modelBuilder.Entity<Priority>()
                 .Property(x => x.Id)
                 .ValueGeneratedNever();
