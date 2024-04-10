@@ -38,8 +38,6 @@ namespace ToDoListMVVM.ViewModel
 
         public ObservableCollection<Note> CollectionList { get; set; }
 
-        public event EventHandler<PropertyChangedEventArgs> PropertyChanged;
-
         private void ExitApplication()
         {
             Application.Current.Shutdown();
@@ -81,7 +79,7 @@ namespace ToDoListMVVM.ViewModel
 
         private void OnNoteEdited(object? sender, Note note)
         {
-            int index = CollectionList.IndexOf(CollectionList.FirstOrDefault(n => n.Id == note.Id));
+            int index = CollectionList.IndexOf(CollectionList.First(n => n.Id == note.Id));
             CollectionList[index].ContentText = note.ContentText;
             CollectionList[index].StartDate = note.StartDate;
             CollectionList[index].EndDate = note.EndDate;
