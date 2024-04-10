@@ -37,6 +37,7 @@ namespace ToDoListMVVM.ViewModel
         public ICommand DeleteCommand { get; }
         public ICommand EditCommand { get; }
         public Note? SelectedItem { get; set; }
+
         public ObservableCollection<Note> CollectionList { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -82,16 +83,15 @@ namespace ToDoListMVVM.ViewModel
 
         private void OnNoteEdited(object? sender, Note note)
         {
-            var newNote = CollectionList.First(n => n.Id == note.Id);
-            CollectionList[newNote.Id] = note;
-            //newNote.ContentText = note.ContentText;
-            //newNote.StartDate = note.StartDate;
-            //newNote.EndDate = note.EndDate;
-            //newNote.PriorityId = note.PriorityId;
-            //newNote.StatusId = note.StatusId;
-            //newNote.Priority = note.Priority;
-            //newNote.Status = note.Status;
-            //newNote.Id = note.Id;
+            var index = CollectionList.IndexOf(CollectionList.FirstOrDefault(n => n.Id == note.Id));
+            CollectionList[index].ContentText = note.ContentText;
+            CollectionList[index].StartDate = note.StartDate;
+            CollectionList[index].EndDate = note.EndDate;
+            CollectionList[index].PriorityId = note.PriorityId;
+            CollectionList[index].StatusId = note.StatusId;
+            CollectionList[index].Priority = note.Priority;
+            CollectionList[index].Status = note.Status;
+            OnPropertyChanged(nameof(CollectionList));
         }
     }
 }

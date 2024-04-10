@@ -9,7 +9,7 @@ using ToDoListMVVM.ViewModel;
 
 namespace ToDoListMVVM.Validation
 {
-    public static class ValidationForm
+    public static class ValidationDate
     {
         public static ValidationResult ValidateEndDate(DateTime endDate, ValidationContext context)
 

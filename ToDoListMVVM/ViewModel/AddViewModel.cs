@@ -75,7 +75,7 @@ namespace ToDoListMVVM.ViewModel
         }
 
         [Required(ErrorMessage = "Proszę podać datę zakończenia.")]
-        [CustomValidation(typeof(ValidationForm), nameof(ValidationForm.ValidateEndDate))]
+        [CustomValidation(typeof(ValidationDate), nameof(ValidationDate.ValidateEndDate))]
         public DateTime EndDate
         {
             get => _endDate;
