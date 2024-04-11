@@ -4,7 +4,7 @@ namespace ToDoListMVVM.Interface
 {
     public interface INoteService
     {
-        void Remove(Note note);
+        void Remove(int id);
 
         IEnumerable<Note> GetAll();
 
@@ -16,7 +16,7 @@ namespace ToDoListMVVM.Interface
 
         event EventHandler<Note> NoteAdded;
 
-        event EventHandler<Note> NoteDeleted;
+        event EventHandler<int> NoteDeleted;
 
         event EventHandler<Note> NoteEdited;
     }

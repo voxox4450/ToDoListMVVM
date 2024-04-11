@@ -13,16 +13,14 @@ namespace ToDoListMVVM.ViewModel
     public class EditViewModel : ObservableValidator
     {
         private readonly INoteService _noteService;
-        private readonly IPriorityService _priorityService;
-        private readonly IStatusService _statusService;
         private readonly IDialogService _dialogService;
         private readonly Note _noteToEdit;
 
         public EditViewModel(Note note)
         {
             _noteService = Ioc.Default.GetRequiredService<INoteService>();
-            _priorityService = Ioc.Default.GetRequiredService<IPriorityService>();
-            _statusService = Ioc.Default.GetRequiredService<IStatusService>();
+            var priorityService = Ioc.Default.GetRequiredService<IPriorityService>();
+            var statusService = Ioc.Default.GetRequiredService<IStatusService>();
             _dialogService = Ioc.Default.GetRequiredService<IDialogService>();
 
             _noteToEdit = note;
@@ -32,8 +30,8 @@ namespace ToDoListMVVM.ViewModel
             SelectedPriorities = _noteToEdit.PriorityId;
             SelectedStatuses = _noteToEdit.StatusId;
 
-            Priorities = [.. _priorityService.GetAll()];
-            Statuses = [.. _statusService.GetAll()];
+            Priorities = [.. priorityService.GetAll()];
+            Statuses = [.. statusService.GetAll()];
 
             EditCommand = new RelayCommand(Edit);
         }
@@ -105,7 +103,6 @@ namespace ToDoListMVVM.ViewModel
         private void Edit()
         {
             if (HasErrors)
-
             {
                 return;
             }

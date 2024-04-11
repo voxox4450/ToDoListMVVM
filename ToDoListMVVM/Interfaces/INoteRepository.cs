@@ -8,7 +8,7 @@ namespace ToDoListMVVM.Interface
 
         void Update(Note note);
 
-        void Delete(Note note);
+        void Delete(int id);
 
         IEnumerable<Note> GetAll();
 

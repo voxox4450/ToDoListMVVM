@@ -9,7 +9,7 @@ namespace ToDoListMVVM.Services
 
         public event EventHandler<Note>? NoteAdded;
 
-        public event EventHandler<Note>? NoteDeleted;
+        public event EventHandler<int>? NoteDeleted;
 
         public event EventHandler<Note>? NoteEdited;
 
@@ -40,14 +40,11 @@ namespace ToDoListMVVM.Services
             }
         }
 
-        public void Remove(Note note)
+        public void Remove(int id)
         {
-            var newNote = Get(note.Id);
-            if (newNote != null)
-            {
-                NoteDeleted?.Invoke(this, newNote);
-            }
-            _noteRepository.Delete(note);
+            _noteRepository.Delete(id);
+
+            NoteDeleted?.Invoke(this, id);
         }
 
         public IEnumerable<Note> GetAll()

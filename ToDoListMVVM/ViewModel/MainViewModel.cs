@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -24,19 +23,19 @@ namespace ToDoListMVVM.ViewModel
 
             ExitCommand = new RelayCommand(ExitApplication);
             AddNoteComand = new RelayCommand(Add);
-            DeleteCommand = new RelayCommand(DeletePage);
-            EditCommand = new RelayCommand(EditPage);
+            DeleteCommand = new RelayCommand(Delete);
+            EditCommand = new RelayCommand(Edit);
 
-            CollectionList = new ObservableCollection<Note>(_noteService.GetAll());
+            LoadNotes();
         }
 
         public ICommand ExitCommand { get; }
         public ICommand AddNoteComand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand EditCommand { get; }
-        public Note? SelectedItem { get; set; }
+        public NoteViewModel? SelectedItem { get; set; }
 
-        public ObservableCollection<Note> CollectionList { get; set; }
+        public ObservableCollection<NoteViewModel> CollectionList { get; set; } = [];
 
         private void ExitApplication()
         {
@@ -50,44 +49,66 @@ namespace ToDoListMVVM.ViewModel
 
         private void OnNoteAdded(object? sender, Note note)
         {
-            CollectionList.Add(note);
+            CollectionList.Add(CreateNoteVm(note));
         }
 
-        private void DeletePage()
+        private void Delete()
         {
             if (SelectedItem is null)
             {
                 return;
             }
-            _noteService.Remove(SelectedItem);
+            _noteService.Remove(SelectedItem.Id);
         }
 
-        private void OnNoteDeleted(object? sender, Note note)
+        private void OnNoteDeleted(object? sender, int id)
         {
-            CollectionList.Remove(note);
+            var noteToRemove = CollectionList.FirstOrDefault(x => x.Id == id);
+            if (noteToRemove is null)
+            {
+                return;
+            }
+
+            CollectionList.Remove(noteToRemove);
         }
 
-        private void EditPage()
+        private void Edit()
         {
             if (SelectedItem is null)
             {
                 return;
             }
 
-            _dialogService.ShowEdit(SelectedItem);
+            _dialogService.ShowEdit(SelectedItem.Note);
         }
 
         private void OnNoteEdited(object? sender, Note note)
         {
-            int index = CollectionList.IndexOf(CollectionList.First(n => n.Id == note.Id));
-            CollectionList[index].ContentText = note.ContentText;
-            CollectionList[index].StartDate = note.StartDate;
-            CollectionList[index].EndDate = note.EndDate;
-            CollectionList[index].PriorityId = note.PriorityId;
-            CollectionList[index].StatusId = note.StatusId;
-            CollectionList[index].Priority = note.Priority;
-            CollectionList[index].Status = note.Status;
-            OnPropertyChanged(nameof(CollectionList));
+            var noteToUpdate = CollectionList.FirstOrDefault(x => x.Id == note.Id);
+            if (noteToUpdate is null)
+            {
+                return;
+            }
+
+            noteToUpdate.Update(note);
+        }
+
+        private void LoadNotes()
+        {
+            var notes = _noteService.GetAll();
+            var noteVms = new List<NoteViewModel>();
+
+            foreach (var note in notes)
+            {
+                noteVms.Add(CreateNoteVm(note));
+            }
+
+            CollectionList = new ObservableCollection<NoteViewModel>(noteVms);
+        }
+
+        private static NoteViewModel CreateNoteVm(Note note)
+        {
+            return new NoteViewModel(note);
         }
     }
 }

@@ -15,9 +15,12 @@ namespace ToDoListMVVM.Repositories
             _appDbContext.SaveChanges();
         }
 
-        public void Delete(Note note)
+        public void Delete(int id)
         {
-            _appDbContext.Remove(note);
+            _appDbContext.Notes
+                .Where(x => x.Id == id)
+                .ExecuteDelete();
+
             _appDbContext.SaveChanges();
         }
 
